@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- SEO -->
+  <title>{% block title %}{{ settings.site_title|default:"Dhanaraj Arjun Lokhande | AI/ML Engineer | Data Scientist" }}{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}{{ settings.meta_description|default:"Dhanaraj Arjun Lokhande — AI/ML Engineer & Data Scientist portfolio." }}{% endblock %}">
+  <meta name="author" content="Dhanaraj Arjun Lokhande">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="{{ request.build_absolute_uri }}">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{% block og_title %}{{ settings.site_title|default:"Dhanaraj AI/ML Portfolio" }}{% endblock %}">
+  <meta property="og:description" content="{{ settings.meta_description|default:"AI/ML Engineer & Data Scientist portfolio" }}">
+  <meta property="og:url" content="{{ request.build_absolute_uri }}">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "mainEntity": {
+      "@type": "Person",
+      "name": "{{ profile.full_name|default:'Dhanaraj Arjun Lokhande' }}",
+      "jobTitle": "{{ profile.title|default:'AI/ML Engineer' }}",
+      "url": "{{ request.build_absolute_uri }}",
+      "email": "{{ profile.email|default:'' }}",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Pune",
+        "addressRegion": "Maharashtra",
+        "addressCountry": "India"
+      }
+    }
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-container">
+      <a href="{% url 'core:home' %}" class="nav-brand">
+        Dhanaraj<span>.AI</span>
+      </a>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#resume">Resume</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#certifications">Certifications</a></li>
+        <li><a href="#activity">Activity</a></li>
+        <li><a href="#github">GitHub</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+        {% if profile and profile.resume_pdf %}
+          <a href="{{ profile.resume_pdf.url }}" class="nav-cta" download>📄 Resume</a>
+        {% endif %}
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Chatbot Widget -->
+  {% csrf_token %}
+  <button class="chatbot-toggle" id="chatbot-toggle" aria-label="Open AI Assistant">🤖</button>
+  <div class="chatbot-window" id="chatbot-window">
+    <div class="chatbot-header">
+      <h3>🤖 Ask Dhanaraj AI</h3>
+      <button class="chatbot-close" id="chatbot-close" aria-label="Close chat">✕</button>
+    </div>
+    <div class="chatbot-messages" id="chatbot-messages"></div>
+    <div class="chatbot-suggestions">
+      <button class="chat-suggestion">What skills does Dhanaraj have?</button>
+      <button class="chat-suggestion">What Machine Learning projects has he built?</button>
+      <button class="chat-suggestion">What Python projects has he completed?</button>
+      <button class="chat-suggestion">What internships does he have?</button>
+      <button class="chat-suggestion">What certifications does he have?</button>
+      <button class="chat-suggestion">Is he available for work?</button>
+      <button class="chat-suggestion">What roles is he looking for?</button>
+      <button class="chat-suggestion">Why should we hire him?</button>
+    </div>
+    <div class="chatbot-input">
+      <input type="text" id="chatbot-input" placeholder="Ask me anything..." aria-label="Chat message">
+      <button id="chatbot-send" aria-label="Send message">➤</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-links">
+        {% for link in social_links %}
+          {% if link.url %}
+            <a href="{% if link.platform == 'email' %}mailto:{{ link.url }}{% else %}{{ link.url }}{% endif %}" 
+               target="{% if link.platform != 'email' %}_blank{% endif %}" 
+               rel="noopener">
+              {{ link.display_name|default:link.get_platform_display }}
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <p class="footer-copy">
+        © {{ year|default:"2026" }} {{ profile.full_name|default:"Dhanaraj Arjun Lokhande" }}. Built with Django & 💜
+      </p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% static 'js/chatbot.js' %}"></script>
+  <script src="{% static 'js/resume-hub.js' %}"></script>
+  <script src="{% static 'js/workflow.js' %}"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

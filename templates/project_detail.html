@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ project.title }} — {{ settings.site_title }}{% endblock %}
+{% block meta_description %}{{ project.short_description|truncatewords:25 }}{% endblock %}
+
+{% block content %}
+<section class="section" style="padding-top: 120px;">
+  <div class="container">
+    <!-- Back button -->
+    <a href="{% url 'core:home' %}#projects" class="btn btn-outline btn-sm" style="margin-bottom: var(--space-xl);">
+      ← Back to Projects
+    </a>
+
+    <!-- Project Header -->
+    <div class="fade-up">
+      <h1 style="font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 900; margin-bottom: var(--space-md);">
+        {{ project.title }}
+      </h1>
+
+      <div class="project-tech-tags" style="margin-bottom: var(--space-xl);">
+        {% for tech in project.technologies.all %}
+          <span class="tech-tag">{{ tech.name }}</span>
+        {% endfor %}
+      </div>
+
+      {% if project.algorithm %}
+      <p style="color: var(--text-accent); font-weight: 600; margin-bottom: var(--space-lg);">
+        🧠 Algorithm: {{ project.algorithm }}
+        {% if project.results %} · 📊 {{ project.results }}{% endif %}
+      </p>
+      {% endif %}
+    </div>
+
+    <!-- Project Content Grid -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2xl); margin-bottom: var(--space-3xl);">
+      {% if project.screenshot %}
+      <div style="grid-column: 1 / -1;">
+        <img src="{{ project.screenshot.url }}" alt="{{ project.title }} screenshot" 
+             style="width: 100%; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle);">
+      </div>
+      {% endif %}
+
+      <!-- Description -->
+      <div class="card fade-up">
+        <h3 style="font-weight: 700; margin-bottom: var(--space-md);">📝 Description</h3>
+        <p style="color: var(--text-secondary); line-height: 1.8;">{{ project.description }}</p>
+      </div>
+
+      <!-- Problem Statement -->
+      {% if project.problem_statement %}
+      <div class="card fade-up">
+        <h3 style="font-weight: 700; margin-bottom: var(--space-md);">❓ Problem Statement</h3>
+        <p style="color: var(--text-secondary); line-height: 1.8;">{{ project.problem_statement }}</p>
+      </div>
+      {% endif %}
+
+      <!-- Solution -->
+      {% if project.solution %}
+      <div class="card fade-up">
+        <h3 style="font-weight: 700; margin-bottom: var(--space-md);">💡 Solution</h3>
+        <p style="color: var(--text-secondary); line-height: 1.8;">{{ project.solution }}</p>
+      </div>
+      {% endif %}
+
+      <!-- Features -->
+      {% if project.features_list %}
+      <div class="card fade-up">
+        <h3 style="font-weight: 700; margin-bottom: var(--space-md);">✨ Features</h3>
+        <ul style="list-style: none; padding: 0;">
+          {% for feature in project.features_list %}
+            <li style="padding: 0.4rem 0; color: var(--text-secondary); display: flex; gap: var(--space-sm);">
+              <span style="color: var(--accent-primary);">▸</span> {{ feature }}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+
+      <!-- Dataset -->
+      {% if project.dataset_info %}
+      <div class="card fade-up">
+        <h3 style="font-weight: 700; margin-bottom: var(--space-md);">📊 Dataset</h3>
+        <p style="color: var(--text-secondary); line-height: 1.8;">{{ project.dataset_info }}</p>
+      </div>
+      {% endif %}
+
+      <!-- Challenges -->
+      {% if project.challenges %}
+      <div class="card fade-up">
+        <h3 style="font-weight: 700; margin-bottom: var(--space-md);">🔥 Challenges</h3>
+        <p style="color: var(--text-secondary); line-height: 1.8;">{{ project.challenges }}</p>
+      </div>
+      {% endif %}
+
+      <!-- Future Improvements -->
+      {% if project.future_improvements %}
+      <div class="card fade-up">
+        <h3 style="font-weight: 700; margin-bottom: var(--space-md);">🚀 Future Improvements</h3>
+        <p style="color: var(--text-secondary); line-height: 1.8;">{{ project.future_improvements }}</p>
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- Workflow Visualization -->
+    {% if project.workflow_steps.all %}
+    <div class="fade-up" style="margin-bottom: var(--space-3xl);">
+      <h2 style="text-align: center; font-size: 1.5rem; font-weight: 800; margin-bottom: var(--space-xl);">
+        ⚙️ Project <span class="text-gradient">Workflow</span>
+      </h2>
+      <div class="workflow-container">
+        {% for step in project.workflow_steps.all %}
+          {% if not forloop.first %}
+            <div class="workflow-arrow">→</div>
+          {% endif %}
+          <div class="workflow-step">
+            <div class="workflow-step-icon">{{ step.icon|default:"⚙️" }}</div>
+            <div class="workflow-step-title">{{ step.title }}</div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Action Buttons -->
+    <div class="text-center fade-up" style="display: flex; justify-content: center; gap: var(--space-md); flex-wrap: wrap;">
+      {% if project.github_url %}
+        <a href="{{ project.github_url }}" class="btn btn-primary" target="_blank" rel="noopener">🐙 View on GitHub</a>
+      {% endif %}
+      {% if project.live_demo_url %}
+        <a href="{{ project.live_demo_url }}" class="btn btn-outline" target="_blank" rel="noopener">🌐 Live Demo</a>
+      {% endif %}
+      <a href="{% url 'core:home' %}#projects" class="btn btn-outline">← All Projects</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

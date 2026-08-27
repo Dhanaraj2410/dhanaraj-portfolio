@@ -1,0 +1,624 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ settings.site_title|default:"Dhanaraj Arjun Lokhande | AI/ML Engineer | Data Scientist" }}{% endblock %}
+
+{% block content %}
+
+<!-- ═══════════════════════════ HERO ═══════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-layout-grid">
+      
+      <!-- Left Column: Profile Photo (Perfect Size & Full Photo Viewer), Name & Title -->
+      <div class="hero-left-col fade-up">
+        <div class="hero-photo-card" onclick="openPhotoModal('{% if profile and profile.photo %}{{ profile.photo.url }}{% endif %}', '{{ profile.full_name|default:"Dhanaraj Arjun Lokhande" }}')">
+          {% if profile and profile.photo %}
+            <img src="{{ profile.photo.url }}" alt="{{ profile.full_name }}" class="hero-photo-img">
+          {% else %}
+            <div class="hero-avatar-fallback">
+              <span>DL</span>
+            </div>
+          {% endif %}
+          <div class="hero-photo-overlay">
+            <span>🔍 View Full Photo</span>
+          </div>
+          <span class="hero-status-badge" title="Open to Opportunities">🟢</span>
+        </div>
+
+        <button class="btn btn-ghost btn-sm" onclick="openPhotoModal('{% if profile and profile.photo %}{{ profile.photo.url }}{% endif %}', '{{ profile.full_name|default:"Dhanaraj Arjun Lokhande" }}')" style="margin-top: 0.6rem; font-size: 0.8rem;">
+          🔍 View Full Photo
+        </button>
+
+        <div class="hero-badge" style="margin-top: 0.75rem;">
+          <span class="dot"></span> Open for Full-Time Hiring
+        </div>
+
+        <h1 class="hero-name-heading">
+          {{ profile.full_name|default:"Dhanaraj Arjun Lokhande" }}
+        </h1>
+
+        <div class="hero-job-title-badge">
+          <span>Target Profile: </span>
+          <strong class="text-gradient">{{ settings.tagline|default:"Python Developer | Data Scientist | AI/ML Engineer" }}</strong>
+        </div>
+
+        <div class="hero-contact-pills">
+          <span>📍 {{ profile.location|default:"Pune, Maharashtra, India" }}</span>
+          <span>📧 {{ profile.email|default:"lokhandedhanraj2410@gmail.com" }}</span>
+          <span>📱 {{ profile.phone|default:"+91 7507855698" }}</span>
+        </div>
+
+        <div class="hero-buttons">
+          {% if profile and profile.resume_pdf %}
+            <a href="{{ profile.resume_pdf.url }}" class="btn btn-primary btn-sm" download>📄 Download Resume</a>
+          {% endif %}
+          <a href="#projects" class="btn btn-outline btn-sm">🚀 View Projects</a>
+          {% for link in social_links %}
+            {% if link.platform == 'github' and link.url %}
+              <a href="{{ link.url }}" class="btn btn-outline btn-sm" target="_blank" rel="noopener">🐙 GitHub</a>
+            {% endif %}
+            {% if link.platform == 'linkedin' and link.url %}
+              <a href="{{ link.url }}" class="btn btn-outline btn-sm" target="_blank" rel="noopener">💼 LinkedIn</a>
+            {% endif %}
+          {% endfor %}
+          <a href="#contact" class="btn btn-outline btn-sm">📧 Contact Me</a>
+        </div>
+      </div>
+
+      <!-- Right Column: Executive Professional Summary Only -->
+      <div class="hero-right-col fade-up">
+        <div class="pro-summary-card">
+          <div class="pro-summary-header">
+            <span class="pro-summary-icon">🎯</span>
+            <div>
+              <h3 class="pro-summary-title">Executive Professional Summary</h3>
+              <p class="pro-summary-sub">2026 Fresh Graduate | B.E. Information Technology</p>
+            </div>
+          </div>
+
+          <div class="pro-summary-body" style="font-size: 0.95rem; line-height: 1.75; color: var(--text-secondary);">
+            <p>
+              Detail-oriented and proactive <strong>2026 Fresh Graduate in Bachelor of Engineering (Information Technology)</strong> from <strong>Savitribai Phule Pune University (SPPU)</strong> with an outstanding academic record of <strong>8.54 CGPA</strong>. Professional Certification in Data Science & Artificial Intelligence from <strong>IIT Roorkee (iHUB DivyaSampark)</strong>.
+            </p>
+            <p style="margin-top: 1rem;">
+              Currently gaining practical software engineering and analytics experience through dual industry internships as a <strong>Data Science Intern at Technoworld Softwares, Pune</strong> and <strong>Python Developer Intern at QSpiders, Pune</strong>.
+            </p>
+            <p style="margin-top: 1rem;">
+              Hands-on expertise in building end-to-end Machine Learning models, Object-Oriented Python programming, complex relational SQL database queries, RESTful API architecture with Django, Exploratory Data Analysis (EDA), and interactive Power BI dashboards. Open to work and available immediately for full-time engineering roles.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ ABOUT ═══════════════════════════ -->
+<section class="section section-alt" id="about">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h2 class="section-title">About <span class="text-gradient">Me</span></h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle">Get to know my background, education, and career focus.</p>
+    </div>
+
+    <div class="about-grid">
+      <div class="fade-up">
+        <p style="font-size: 1.05rem; line-height: 1.8; color: var(--text-secondary);">
+          {{ profile.bio|default:"AI/ML Engineer and Data Science graduate with strong skills in Python, Machine Learning, SQL, and Data Analysis." }}
+        </p>
+
+        <div class="about-info-grid" style="margin-top: var(--space-xl);">
+          <div class="about-info-item">
+            <div class="about-info-label">Name</div>
+            <div class="about-info-value">{{ profile.full_name|default:"Dhanaraj Arjun Lokhande" }}</div>
+          </div>
+          <div class="about-info-item">
+            <div class="about-info-label">Role</div>
+            <div class="about-info-value">{{ profile.title|default:"AI/ML Engineer | Data Scientist" }}</div>
+          </div>
+          <div class="about-info-item">
+            <div class="about-info-label">Location</div>
+            <div class="about-info-value">{{ profile.location|default:"Pune, Maharashtra, India" }}</div>
+          </div>
+          <div class="about-info-item">
+            <div class="about-info-label">Email</div>
+            <div class="about-info-value" style="font-size:0.85rem;">{{ profile.email|default:"Not provided" }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fade-up">
+        <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: var(--space-lg);">
+          🎯 Career Focus
+        </h3>
+        <div style="display: flex; flex-wrap: wrap; gap: var(--space-sm);">
+          {% for focus in "Python,Machine Learning,Data Science,SQL,Data Analysis,NLP,Deep Learning,Generative AI,AI Application Development,Real-world Problem Solving"|make_list %}
+          {% endfor %}
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">Machine Learning</span>
+          <span class="tech-tag">Data Science</span>
+          <span class="tech-tag">SQL</span>
+          <span class="tech-tag">Data Analysis</span>
+          <span class="tech-tag">NLP</span>
+          <span class="tech-tag">Deep Learning</span>
+          <span class="tech-tag">Generative AI</span>
+          <span class="tech-tag">AI Application Development</span>
+          <span class="tech-tag">Real-world Problem Solving</span>
+        </div>
+
+        {% if education %}
+        <h3 style="font-size: 1.2rem; font-weight: 700; margin: var(--space-xl) 0 var(--space-lg);">
+          🎓 Education
+        </h3>
+        {% for edu in education %}
+          <div class="about-info-item" style="margin-bottom: var(--space-sm);">
+            <div class="about-info-value">{{ edu.degree }}</div>
+            <div style="color: var(--text-accent); font-size: 0.85rem;">{{ edu.institution }}</div>
+            <div style="color: var(--text-muted); font-size: 0.8rem; font-family: var(--font-mono);">
+              {% if edu.start_year %}{{ edu.start_year }}–{% endif %}{{ edu.end_year }}
+              {% if edu.score_display %} · {{ edu.score_display }}{% endif %}
+            </div>
+          </div>
+        {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ RESUME & CAREER HUB ═══════════════════════════ -->
+<section class="section" id="resume">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h2 class="section-title">2026 Fresher <span class="text-gradient">Career & Resume Hub</span></h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle">Select your target job profile to view or download tailored resumes.</p>
+    </div>
+
+    <!-- Hidden admin resume file bindings -->
+    {% for rr in role_resumes %}
+      {% if rr.resume_file %}
+        <span data-admin-resume="{{ rr.resume_file.url }}" data-role="{{ rr.role_key }}" style="display:none;"></span>
+      {% endif %}
+    {% endfor %}
+
+    <!-- Role Selection Tabs -->
+    <div class="resume-roles-nav fade-up">
+      <button class="resume-role-tab active" data-role="data-analyst">
+        <span>📊</span> Data Analyst / BA
+      </button>
+      <button class="resume-role-tab" data-role="data-science">
+        <span>🤖</span> Data Science
+      </button>
+      <button class="resume-role-tab" data-role="machine-learning">
+        <span>🧠</span> AI / ML Engineer
+      </button>
+      <button class="resume-role-tab" data-role="python-developer">
+        <span>🐍</span> Python Developer
+      </button>
+      <button class="resume-role-tab" data-role="sql-developer">
+        <span>🗃️</span> SQL Developer
+      </button>
+    </div>
+
+    <!-- Dynamic Role Resume Display -->
+    <div id="role-resume-display"></div>
+  </div>
+</section>
+
+<!-- Resume Preview Modal -->
+<div class="resume-modal-backdrop" id="resume-modal">
+  <div class="resume-modal-content">
+    <button class="resume-modal-close-btn" id="resume-modal-close" aria-label="Close Modal">✕</button>
+    <div id="resume-modal-body"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ SKILLS ═══════════════════════════ -->
+<section class="section section-alt" id="skills">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h2 class="section-title">Skills <span class="text-gradient">Dashboard</span></h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle">Technical skills and proficiency levels (self-assessed).</p>
+    </div>
+
+    <div class="skills-grid">
+      {% for category_name, category_skills in skill_categories.items %}
+      <div class="skill-category-card fade-up">
+        <div class="skill-category-title">
+          {% if category_name == "Programming" %}💻
+          {% elif category_name == "Python Libraries" %}📦
+          {% elif category_name == "Machine Learning" %}🤖
+          {% elif category_name == "Visualization" %}📊
+          {% elif category_name == "Developer Tools" %}🛠️
+          {% elif category_name == "Soft Skills" %}🧠
+          {% endif %}
+          {{ category_name }}
+        </div>
+        {% for skill in category_skills %}
+        <div class="skill-item">
+          <div class="skill-header">
+            <span class="skill-name">{{ skill.name }}</span>
+            <span class="skill-percent">{{ skill.proficiency }}%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-bar-fill" data-width="{{ skill.proficiency }}"></div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% empty %}
+      <p style="color: var(--text-muted);">Skills will appear here once added through the admin panel.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ PROJECTS ═══════════════════════════ -->
+<section class="section" id="projects">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h2 class="section-title">Featured <span class="text-gradient">Projects</span></h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle">AI/ML projects with real-world applications.</p>
+    </div>
+
+    <div class="projects-grid">
+      {% for project in featured_projects %}
+      <div class="project-card fade-up">
+        <div class="project-card-header">
+          <h3 class="project-title">{{ project.title }}</h3>
+          <p class="project-description">{{ project.short_description }}</p>
+          <div class="project-tech-tags">
+            {% for tech in project.technologies.all %}
+              <span class="tech-tag">{{ tech.name }}</span>
+            {% endfor %}
+          </div>
+        </div>
+
+        {% if project.algorithm %}
+        <div class="project-meta">
+          <span class="project-algorithm">🧠 Algorithm: <strong style="margin-left:4px;">{{ project.algorithm }}</strong></span>
+        </div>
+        {% endif %}
+
+        {% if project.results %}
+        <div class="project-meta">
+          <span class="project-algorithm">📊 {{ project.results|truncatewords:12 }}</span>
+        </div>
+        {% endif %}
+
+        <div class="project-card-footer">
+          <a href="{% url 'core:project_detail' slug=project.slug %}" class="btn btn-primary btn-sm">View Project</a>
+          {% if project.github_url %}
+            <a href="{{ project.github_url }}" class="btn btn-outline btn-sm" target="_blank" rel="noopener">GitHub</a>
+          {% endif %}
+          {% if project.live_demo_url %}
+            <a href="{{ project.live_demo_url }}" class="btn btn-outline btn-sm" target="_blank" rel="noopener">Live Demo</a>
+          {% endif %}
+        </div>
+      </div>
+      {% empty %}
+      <p style="color: var(--text-muted);">Projects will appear here once added through the admin panel.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ ML WORKFLOW ═══════════════════════════ -->
+<section class="section section-alt" id="ml-workflow">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h2 class="section-title">ML <span class="text-gradient">Workflow</span></h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle">The machine learning pipeline I follow for building AI solutions.</p>
+    </div>
+
+    <div class="workflow-container" id="ml-workflow-generic"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ EXPERIENCE ═══════════════════════════ -->
+<section class="section" id="experience">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h2 class="section-title">Work <span class="text-gradient">Experience</span></h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle">Professional internships and work experience.</p>
+    </div>
+
+    <div class="timeline">
+      {% for exp in experience %}
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <div class="timeline-title">{{ exp.title }}</div>
+          <div class="timeline-company">{{ exp.company }} — {{ exp.location }}</div>
+          <div class="timeline-date">{{ exp.duration_display }}</div>
+          {% if exp.description %}
+            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: var(--space-md);">{{ exp.description }}</p>
+          {% endif %}
+          {% if exp.responsibilities_list %}
+          <ul class="timeline-responsibilities">
+            {% for resp in exp.responsibilities_list %}
+              <li>{{ resp }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+      </div>
+      {% empty %}
+      <p style="color: var(--text-muted);">Experience will appear here once added through the admin panel.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ CERTIFICATIONS ═══════════════════════════ -->
+<section class="section section-alt" id="certifications">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h2 class="section-title"><span class="text-gradient">Certifications</span></h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle">Professional certifications and courses completed.</p>
+    </div>
+
+    <div class="certs-grid">
+      {% for cert in certifications %}
+      <div class="cert-card fade-up">
+        {% if cert.certificate_image %}
+          <div style="margin-bottom: var(--space-md); border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--border-subtle);">
+            <a href="{{ cert.certificate_image.url }}" target="_blank" rel="noopener">
+              <img src="{{ cert.certificate_image.url }}" alt="{{ cert.title }}" style="width:100%; height:180px; object-fit:cover; display:block; transition: transform var(--transition-base);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            </a>
+          </div>
+        {% else %}
+          <div class="cert-icon">🏆</div>
+        {% endif %}
+        <div class="cert-title">{{ cert.title }}</div>
+        <div class="cert-org">{{ cert.organization }}</div>
+        {% if cert.description %}
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.4rem;">{{ cert.description }}</p>
+        {% endif %}
+        {% if cert.skills_list %}
+        <div class="cert-skills" style="margin-top: 0.6rem;">
+          {% for skill in cert.skills_list %}
+            <span class="tech-tag">{{ skill }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+        <div style="display: flex; gap: var(--space-xs); flex-wrap: wrap; margin-top: var(--space-md);">
+          {% if cert.certificate_image %}
+            <a href="{{ cert.certificate_image.url }}" class="btn btn-primary btn-sm" target="_blank" rel="noopener">👁️ View Certificate Image</a>
+          {% endif %}
+          {% if cert.certificate_pdf %}
+            <a href="{{ cert.certificate_pdf.url }}" class="btn btn-outline btn-sm" target="_blank" rel="noopener">📄 View PDF Credential</a>
+          {% endif %}
+          {% if cert.verification_url %}
+            <a href="{{ cert.verification_url }}" class="btn btn-outline btn-sm" target="_blank" rel="noopener">🔗 Verify Credential</a>
+          {% endif %}
+          {% if not cert.certificate_image and not cert.certificate_pdf and not cert.verification_url %}
+            <button class="btn btn-outline btn-sm" onclick="alert('Certification Credential: {{ cert.title }} issued by {{ cert.organization }}. Verified for Dhanaraj Arjun Lokhande (2026 BE IT — 8.54 CGPA).')">
+              👁️ View Certificate Details
+            </button>
+          {% endif %}
+        </div>
+      </div>
+      {% empty %}
+      <p style="color: var(--text-muted);">Certifications will appear here once added through the admin panel.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ GITHUB ═══════════════════════════ -->
+<section class="section" id="github">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h2 class="section-title">GitHub <span class="text-gradient">Activity</span></h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle">Open-source repositories and contributions.</p>
+    </div>
+
+    <div id="github-content" class="fade-up">
+      <div class="loading-spinner"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ ACTIVITY ═══════════════════════════ -->
+<section class="section section-alt" id="activity">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h2 class="section-title">Career <span class="text-gradient">Activity</span></h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle">Coding, learning, and career milestones.</p>
+    </div>
+
+    <div class="activity-categories">
+      {% for category_name, category_activities in activity_categories.items %}
+      <div class="activity-category fade-up">
+        <div class="activity-category-title">
+          {% if category_name == "Coding Activity" %}💻
+          {% elif category_name == "Learning Activity" %}📚
+          {% elif category_name == "Career Activity" %}🎯
+          {% endif %}
+          {{ category_name }}
+        </div>
+        {% for activity in category_activities %}
+        <div class="activity-item">
+          <span class="activity-icon">{{ activity.icon }}</span>
+          <div class="activity-text">
+            <strong>{{ activity.title }}</strong>
+            {{ activity.description }}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% empty %}
+      <p style="color: var(--text-muted);">Activities will appear here once added through the admin panel.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════ RECRUITER DASHBOARD ═══════════════════════════ -->
+<section class="section" id="recruiter">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h2 class="section-title">Recruiter <span class="text-gradient">Dashboard</span></h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle">Quick candidate snapshot for hiring managers.</p>
+    </div>
+
+    <div class="recruiter-grid fade-up">
+      <div class="recruiter-snapshot">
+        <div class="recruiter-name">{{ profile.full_name|default:"Dhanaraj Arjun Lokhande" }}</div>
+        <div class="recruiter-title">{{ profile.title|default:"AI/ML Engineer | Data Scientist" }}</div>
+        <ul class="recruiter-details">
+          <li><strong>📍 Location:</strong> {{ profile.location|default:"Pune, Maharashtra" }}</li>
+          <li><strong>🎓 Education:</strong> BE Information Technology</li>
+          <li><strong>📅 Graduation:</strong> 2026</li>
+          <li><strong>📊 CGPA:</strong> 8.54</li>
+          <li><strong>📧 Email:</strong> {{ profile.email|default:"Not provided" }}</li>
+          <li><strong>📱 Phone:</strong> {{ profile.phone|default:"Not provided" }}</li>
+        </ul>
+      </div>
+
+      <div class="recruiter-skills-section">
+        <h3 style="font-weight: 700; margin-bottom: var(--space-md);">🛠️ Primary Skills</h3>
+        <div class="recruiter-skill-tags">
+          <span class="tech-tag">Python</span>
+          <span class="tech-tag">SQL</span>
+          <span class="tech-tag">Machine Learning</span>
+          <span class="tech-tag">Django</span>
+          <span class="tech-tag">Scikit-learn</span>
+          <span class="tech-tag">Pandas</span>
+          <span class="tech-tag">NumPy</span>
+          <span class="tech-tag">Power BI</span>
+        </div>
+
+        <h3 style="font-weight: 700; margin-bottom: var(--space-md);">✅ Recommended Roles</h3>
+        <ul class="recruiter-roles">
+          {% for role in job_roles %}
+            <li>{{ role.title }}</li>
+          {% empty %}
+            <li>AI/ML Engineer</li>
+            <li>Data Scientist</li>
+            <li>Data Analyst</li>
+            <li>Python Developer</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ═══════════════════════════ LINKEDIN ═══════════════════════════ -->
+{% if settings.linkedin_url %}
+<section class="section" id="linkedin">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h2 class="section-title"><span class="text-gradient">LinkedIn</span></h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="linkedin-card fade-up">
+      <div class="linkedin-icon">💼</div>
+      <h3 style="font-weight: 700; margin-bottom: var(--space-sm);">Connect on LinkedIn</h3>
+      <p style="color: var(--text-secondary); margin-bottom: var(--space-lg);">
+        View my professional profile, connections, and career updates.
+      </p>
+      <a href="{{ settings.linkedin_url }}" class="btn btn-primary" target="_blank" rel="noopener">
+        View LinkedIn Profile →
+      </a>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- ═══════════════════════════ CONTACT ═══════════════════════════ -->
+<section class="section section-alt" id="contact">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h2 class="section-title">Get in <span class="text-gradient">Touch</span></h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle">Have an opportunity or question? Let's connect!</p>
+    </div>
+
+    <div class="contact-grid fade-up">
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">📧</div>
+          <div>
+            <div class="contact-item-label">Email</div>
+            <div class="contact-item-value">
+              <a href="mailto:{{ profile.email|default:'lokhandedhanraj2410@gmail.com' }}">
+                {{ profile.email|default:"lokhandedhanraj2410@gmail.com" }}
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">📱</div>
+          <div>
+            <div class="contact-item-label">Phone</div>
+            <div class="contact-item-value">{{ profile.phone|default:"+91 7507855698" }}</div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-item-label">Location</div>
+            <div class="contact-item-value">{{ profile.location|default:"Pune, Maharashtra, India" }}</div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: var(--space-sm); margin-top: var(--space-md);">
+          {% for link in social_links %}
+            {% if link.url %}
+              <a href="{% if link.platform == 'email' %}mailto:{{ link.url }}{% else %}{{ link.url }}{% endif %}"
+                 class="btn btn-icon" target="{% if link.platform != 'email' %}_blank{% endif %}" 
+                 rel="noopener" title="{{ link.get_platform_display }}">
+                {% if link.platform == 'github' %}🐙
+                {% elif link.platform == 'linkedin' %}💼
+                {% elif link.platform == 'email' %}📧
+                {% else %}🔗{% endif %}
+              </a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <div>
+        <form id="contact-form" method="post" action="{% url 'core:contact_submit' %}">
+          {% csrf_token %}
+          {{ contact_form.website }}
+          <div class="form-row">
+            {{ contact_form.name }}
+            {{ contact_form.email }}
+          </div>
+          <div class="form-row">
+            {{ contact_form.company }}
+            {{ contact_form.job_role }}
+          </div>
+          {{ contact_form.message }}
+          <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; justify-content: center;">
+            📤 Send Message
+          </button>
+        </form>
+        <div class="form-success" id="form-success"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
