@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dhanaraj Lokhande — AI/ML Engineer & Data Scientist</title>
+  <meta name="description" content="Portfolio of Dhanaraj Arjun Lokhande — AI/ML Engineer, Data Scientist, and NLP enthusiast. Explore projects, skills, and live ML demos." />
+  <meta name="keywords" content="Dhanaraj Lokhande, AI, ML, Data Science, Python, Portfolio, Machine Learning, NLP" />
+  <meta name="author" content="Dhanaraj Arjun Lokhande" />
+  <meta property="og:title" content="Dhanaraj Lokhande — AI/ML Engineer & Data Scientist" />
+  <meta property="og:description" content="Explore AI/ML projects, interactive demos, and a creative developer terminal." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+<body>
+
+  <!-- Particle Canvas -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar__inner">
+      <a href="#hero" class="navbar__logo">
+        DL<span class="navbar__logo-dot"></span>
+      </a>
+
+      <div class="navbar__links" id="nav-links">
+        <a href="#about" class="navbar__link">About</a>
+        <a href="#resume" class="navbar__link">Resume</a>
+        <a href="#skills" class="navbar__link">Skills</a>
+        <a href="#projects" class="navbar__link">Projects</a>
+        <a href="#playground" class="navbar__link">ML Demos</a>
+        <a href="#experience" class="navbar__link">Experience</a>
+        <a href="#certifications" class="navbar__link">Certs</a>
+        <a href="#contact" class="navbar__link">Contact</a>
+      </div>
+
+      <div class="navbar__actions">
+        <span class="navbar__status">
+          <span class="navbar__status-dot"></span>
+          🎓 2026 Fresher | Open to Work
+        </span>
+        <a href="#contact" class="btn btn--primary btn--sm">Let's Talk</a>
+        <div class="navbar__burger" id="nav-burger">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="nav-overlay" id="nav-overlay"></div>
+
+
+  <!-- ===== HERO ===== -->
+  <section class="hero section" id="hero">
+    <div class="container">
+      <div class="hero-layout-grid">
+        
+        <!-- Left Column: Avatar Photo, Small Name Font, Job Title & Actions -->
+        <div class="hero-left-col reveal">
+          <div class="hero-photo-card" onclick="openPhotoModal('', 'Dhanaraj Arjun Lokhande')">
+            <div class="hero-avatar-fallback">
+              <span>DL</span>
+            </div>
+            <div class="hero-photo-overlay">
+              <span>🔍 View Full Photo</span>
+            </div>
+            <span class="hero-status-badge" title="Open to Opportunities">🟢</span>
+          </div>
+
+          <button class="btn btn--ghost btn--sm" onclick="openPhotoModal('', 'Dhanaraj Arjun Lokhande')" style="margin-top: 0.6rem; font-size: 0.8rem;">
+            🔍 View Full Photo
+          </button>
+
+          <div class="hero-badge" style="margin-top: 0.75rem;">
+            <span class="dot"></span> Open for Full-Time Hiring
+          </div>
+
+          <h1 class="hero-name-heading">
+            Dhanaraj Arjun <span class="text-gradient">Lokhande</span>
+          </h1>
+
+          <div class="hero-job-title-badge">
+            <span>Target Role: </span>
+            <span class="hero__role-text" id="typed-role"></span>
+            <span class="hero__cursor"></span>
+          </div>
+
+          <div class="hero-contact-pills">
+            <span>📍 Pune, Maharashtra, India</span>
+            <span>📧 lokhandedhanraj2410@gmail.com</span>
+            <span>📱 +91 7507855698</span>
+          </div>
+
+          <div class="hero__actions">
+            <a href="#resume" class="btn btn--primary btn--sm">
+              <span>📄</span> Role-Tailored Resumes
+            </a>
+            <a href="#projects" class="btn btn--outline btn--sm">
+              <span>✨</span> Explore My Work
+            </a>
+            <a href="#playground" class="btn btn--ghost btn--sm">
+              <span>🧪</span> Try ML Demos
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Column: Executive Professional Summary Only -->
+        <div class="hero-right-col reveal">
+          <div class="pro-summary-card">
+            <div class="pro-summary-header">
+              <span class="pro-summary-icon">🎯</span>
+              <div>
+                <h3 class="pro-summary-title">Executive Professional Summary</h3>
+                <p class="pro-summary-sub">2026 Fresh Graduate | B.E. Information Technology</p>
+              </div>
+            </div>
+
+            <div class="pro-summary-body" style="font-size: 0.95rem; line-height: 1.75; color: var(--text-body, #cbd5e1);">
+              <p>
+                Detail-oriented and proactive <strong>2026 Fresh Graduate in Bachelor of Engineering (Information Technology)</strong> from <strong>Savitribai Phule Pune University (SPPU)</strong> with an outstanding academic record of <strong>8.54 CGPA</strong>. Professional Certification in Data Science & Artificial Intelligence from <strong>IIT Roorkee (iHUB DivyaSampark)</strong>.
+              </p>
+              <p style="margin-top: 1rem;">
+                Currently gaining practical software engineering and analytics experience through dual industry internships as a <strong>Data Science Intern at Technoworld Softwares, Pune</strong> and <strong>Python Developer Intern at QSpiders, Pune</strong>.
+              </p>
+              <p style="margin-top: 1rem;">
+                Hands-on expertise in building end-to-end Machine Learning models, Object-Oriented Python programming, complex relational SQL database queries, RESTful API architecture with Django, Exploratory Data Analysis (EDA), and interactive Power BI dashboards. Open to work and available immediately for full-time engineering roles.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== ABOUT ===== -->
+  <section class="section section--alt" id="about">
+    <div class="container">
+      <div class="section__header reveal">
+        <span class="section__label">👤 About Me</span>
+        <h2 class="section__title">A Little About Myself</h2>
+        <div class="divider"></div>
+      </div>
+
+      <div class="about__grid">
+        <div class="about__text reveal">
+          <p>
+            I'm <span class="about__highlight">Dhanaraj Arjun Lokhande</span>, a final-year B.E. Information Technology student at 
+            <span class="about__highlight">Savitribai Phule Pune University</span> with an 8.54 CGPA. I'm deeply curious about how data can drive better decisions and love building end-to-end solutions.
+          </p>
+          <p>
+            My journey spans <span class="about__highlight">Machine Learning</span>, <span class="about__highlight">NLP</span>, 
+            <span class="about__highlight">Generative AI</span>, and <span class="about__highlight">full-stack web development</span>. 
+            I enjoy going from raw datasets to deployed applications — handling EDA, feature engineering, model training, and deployment.
+          </p>
+          <p>
+            Outside of code, I'm an <span class="about__highlight">NSS volunteer</span> who believes in community service, and I constantly explore new AI tools and techniques to stay on the cutting edge.
+          </p>
+        </div>
+
+        <div class="about__domains reveal reveal-delay-2">
+          <div class="domain-card">
+            <span class="domain-card__icon">🤖</span>
+            <h4 class="domain-card__title">ML & Prediction</h4>
+            <p class="domain-card__desc">Regression, Classification, Hyperparameter Tuning</p>
+          </div>
+          <div class="domain-card">
+            <span class="domain-card__icon">💬</span>
+            <h4 class="domain-card__title">NLP & GenAI</h4>
+            <p class="domain-card__desc">OpenAI API, Resume Scoring, Intelligent Agents</p>
+          </div>
+          <div class="domain-card">
+            <span class="domain-card__icon">📊</span>
+            <h4 class="domain-card__title">EDA & Data Eng.</h4>
+            <p class="domain-card__desc">Pandas, NumPy, Feature Engineering, Viz</p>
+          </div>
+          <div class="domain-card">
+            <span class="domain-card__icon">🌐</span>
+            <h4 class="domain-card__title">Full-Stack Deploy</h4>
+            <p class="domain-card__desc">Django, React, SQL, REST APIs</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== RESUME & CAREER HUB ===== -->
+  <section class="section" id="resume">
+    <div class="container">
+      <div class="section__header reveal">
+        <span class="section__label">📄 Career Hub</span>
+        <h2 class="section__title">Role-Tailored Resumes & ATS Analyzer</h2>
+        <div class="divider"></div>
+        <p class="section__subtitle">
+          2026 Fresh Graduate (B.E. IT — 8.54 CGPA) targeting 5 core domains. Select a role below to view or download tailored resumes.
+        </p>
+      </div>
+
+      <!-- Role Tabs -->
+      <div class="resume-roles-nav reveal">
+        <button class="resume-role-tab active" data-role="data-analyst">
+          <span>📊</span> Data Analyst / BA
+        </button>
+        <button class="resume-role-tab" data-role="data-science">
+          <span>🤖</span> Data Science
+        </button>
+        <button class="resume-role-tab" data-role="machine-learning">
+          <span>🧠</span> AI / ML Engineer
+        </button>
+        <button class="resume-role-tab" data-role="python-developer">
+          <span>🐍</span> Python Developer
+        </button>
+        <button class="resume-role-tab" data-role="sql-developer">
+          <span>🗃️</span> SQL Developer
+        </button>
+      </div>
+
+      <!-- Dynamic Role Resume Render Container -->
+      <div id="role-resume-display"></div>
+    </div>
+  </section>
+
+  <!-- Resume Preview Modal -->
+  <div class="resume-modal-backdrop" id="resume-modal">
+    <div class="resume-modal-content">
+      <button class="resume-modal-close-btn" id="resume-modal-close" aria-label="Close Modal">✕</button>
+      <div id="resume-modal-body"></div>
+    </div>
+  </div>
+
+
+  <!-- ===== SKILLS ===== -->
+  <section class="section" id="skills">
+    <div class="container">
+      <div class="section__header reveal">
+        <span class="section__label">⚡ Tech Stack</span>
+        <h2 class="section__title">Skills & Technologies</h2>
+        <div class="divider"></div>
+        <p class="section__subtitle">Tools and technologies I work with on a daily basis.</p>
+      </div>
+
+      <div class="skills__tabs reveal" id="skill-tabs">
+        <button class="skills__tab active" data-tab="languages">Languages</button>
+        <button class="skills__tab" data-tab="ml-libs">ML & Libraries</button>
+        <button class="skills__tab" data-tab="frameworks">Frameworks</button>
+        <button class="skills__tab" data-tab="visualization">Visualization</button>
+        <button class="skills__tab" data-tab="tools">Dev Tools</button>
+        <button class="skills__tab" data-tab="soft">Soft Skills</button>
+      </div>
+
+      <div id="skill-panels">
+        <!-- Languages -->
+        <div class="skills__grid active" data-panel="languages">
+          <span class="skill-chip"><span class="skill-chip__icon">🐍</span> Python</span>
+          <span class="skill-chip"><span class="skill-chip__icon">🗃️</span> SQL</span>
+          <span class="skill-chip"><span class="skill-chip__icon">⚡</span> JavaScript</span>
+          <span class="skill-chip"><span class="skill-chip__icon">🏗️</span> HTML5</span>
+          <span class="skill-chip"><span class="skill-chip__icon">🎨</span> CSS3</span>
+          <span class="skill-chip"><span class="skill-chip__icon">☕</span> Java (Basics)</span>
+        </div>
+        <!-- ML & Libraries -->
+        <div class="skills__grid" data-panel="ml-libs">
+          <span class="skill-chip"><span class="skill-chip__icon">🔢</span> NumPy</span>
+          <span class="skill-chip"><span class="skill-chip__icon">🐼</span> Pandas</span>
+          <span class="skill-chip"><span class="skill-chip__icon">🧠</span> Scikit-learn</span>
+          <span class="skill-chip"><span class="skill-chip__icon">🔥</span> TensorFlow</span>
+          <span class="skill-chip"><span class="skill-chip__icon">⚙️</span> Keras</span>
+          <span class="skill-chip"><span class="skill-chip__icon">🔬</span> Feature Engineering</span>
+          <span class="skill-chip"><span class="skill-chip__icon">📉</span> Regression</span>
+          <span class="skill-chip"><span class="skill-chip__icon">📋</span> Classification</span>
+          <span class="skill-chip"><span class="skill-chip__icon">🔄</span> Cross-Validation</span>
+          <span class="skill-chip"><span class="skill-chip__icon">🎯</span> Hyperparameter Tuning</span>
+        </div>
+        <!-- Frameworks -->
+        <div class="skills__grid" data-panel="frameworks">
+          <span class="skill-chip"><span class="skill-chip__icon">🌿</span> Django</span>
+          <span class="skill-chip"><span class="skill-chip__icon">⚛️</span> React.js</span>
+          <span class="skill-chip"><span class="skill-chip__icon">🍃</span> Spring Boot</span>
+          <span class="skill-chip"><span class="skill-chip__icon">🔗</span> REST APIs</span>
+          <span class="skill-chip"><span class="skill-chip__icon">🐬</span> MySQL</span>
+        </div>
+        <!-- Visualization -->
+        <div class="skills__grid" data-panel="visualization">
+          <span class="skill-chip"><span class="skill-chip__icon">📊</span> Matplotlib</span>
+          <span class="skill-chip"><span class="skill-chip__icon">🌊</span> Seaborn</span>
+          <span class="skill-chip"><span class="skill-chip__icon">📈</span> Power BI</span>
+          <span class="skill-chip"><span class="skill-chip__icon">📉</span> Tableau</span>
+          <span class="skill-chip"><span class="skill-chip__icon">📑</span> Excel Charts</span>
+        </div>
+        <!-- Dev Tools -->
+        <div class="skills__grid" data-panel="tools">
+          <span class="skill-chip"><span class="skill-chip__icon">🐙</span> Git & GitHub</span>
+          <span class="skill-chip"><span class="skill-chip__icon">💻</span> VS Code</span>
+          <span class="skill-chip"><span class="skill-chip__icon">📓</span> Jupyter Notebook</span>
+          <span class="skill-chip"><span class="skill-chip__icon">☁️</span> Google Colab</span>
+          <span class="skill-chip"><span class="skill-chip__icon">🗄️</span> MySQL Workbench</span>
+        </div>
+        <!-- Soft Skills -->
+        <div class="skills__grid" data-panel="soft">
+          <span class="skill-chip"><span class="skill-chip__icon">🧩</span> Analytical Thinking</span>
+          <span class="skill-chip"><span class="skill-chip__icon">🎯</span> Problem Solving</span>
+          <span class="skill-chip"><span class="skill-chip__icon">🗣️</span> Business Communication</span>
+          <span class="skill-chip"><span class="skill-chip__icon">👥</span> Team Leadership</span>
+          <span class="skill-chip"><span class="skill-chip__icon">📚</span> Continuous Learning</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== PROJECTS ===== -->
+  <section class="section section--alt" id="projects">
+    <div class="container">
+      <div class="section__header reveal">
+        <span class="section__label">🔨 Featured Work</span>
+        <h2 class="section__title">Projects I've Built</h2>
+        <div class="divider"></div>
+        <p class="section__subtitle">End-to-end AI/ML solutions — from data preprocessing to deployment.</p>
+      </div>
+
+      <div class="grid grid--3 reveal">
+        <!-- Project 1: Mock Interview -->
+        <article class="project-card" id="project-interview">
+          <div class="project-card__banner" style="background: linear-gradient(135deg, #6366f1, #a855f7); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size:4rem;">🎙️</span>
+          </div>
+          <div class="project-card__body">
+            <span class="project-card__number">PROJECT 01</span>
+            <h3 class="project-card__title">AI-Powered Mock Interview Platform</h3>
+            <p class="project-card__desc">
+              Full-stack platform with NLP-based resume analysis, automated interview Q&A generation, and intelligent scoring using OpenAI API.
+            </p>
+            <div class="project-card__tags">
+              <span class="project-card__tag">Python</span>
+              <span class="project-card__tag">NLP</span>
+              <span class="project-card__tag">OpenAI API</span>
+              <span class="project-card__tag">Django</span>
+              <span class="project-card__tag">React</span>
+              <span class="project-card__tag">Spring Boot</span>
+              <span class="project-card__tag">MySQL</span>
+            </div>
+            <div class="project-card__highlights">
+              <p class="project-card__highlight">NLP-driven resume analysis & scoring</p>
+              <p class="project-card__highlight">Auto-generated interview Q&A with AI</p>
+              <p class="project-card__highlight">Real-time intelligent feedback system</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2: InsurePredict -->
+        <article class="project-card" id="project-insurance">
+          <div class="project-card__banner" style="background: linear-gradient(135deg, #10b981, #2dd4bf); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size:4rem;">🏥</span>
+          </div>
+          <div class="project-card__body">
+            <span class="project-card__number">PROJECT 02</span>
+            <h3 class="project-card__title">InsurePredict — Insurance Cost Prediction</h3>
+            <p class="project-card__desc">
+              ML pipeline for predicting health insurance costs using EDA, feature engineering, and Linear Regression on 1300+ records.
+            </p>
+            <div class="project-card__tags">
+              <span class="project-card__tag">Python</span>
+              <span class="project-card__tag">Scikit-learn</span>
+              <span class="project-card__tag">Django</span>
+              <span class="project-card__tag">SQL</span>
+              <span class="project-card__tag">EDA</span>
+            </div>
+            <div class="project-card__highlights">
+              <p class="project-card__highlight">EDA & feature engineering on 1300+ records</p>
+              <p class="project-card__highlight">Linear Regression pipeline with high accuracy</p>
+              <p class="project-card__highlight">Django-deployed prediction interface</p>
+            </div>
+            <div class="project-card__actions">
+              <a href="#playground" class="btn btn--ghost btn--sm">🧪 Try Demo</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 3: Loan Approval -->
+        <article class="project-card" id="project-loan">
+          <div class="project-card__banner" style="background: linear-gradient(135deg, #f59e0b, #fb923c); display:flex; align-items:center; justify-content:center;">
+            <span style="font-size:4rem;">🏦</span>
+          </div>
+          <div class="project-card__body">
+            <span class="project-card__number">PROJECT 03</span>
+            <h3 class="project-card__title">AI-Powered Loan Approval Prediction</h3>
+            <p class="project-card__desc">
+              Real-time loan eligibility prediction system achieving 86% accuracy with risk assessment and decision logic.
+            </p>
+            <div class="project-card__tags">
+              <span class="project-card__tag">Python</span>
+              <span class="project-card__tag">Django</span>
+              <span class="project-card__tag">Scikit-learn</span>
+              <span class="project-card__tag">MySQL</span>
+              <span class="project-card__tag">JavaScript</span>
+            </div>
+            <div class="project-card__highlights">
+              <p class="project-card__highlight">86% prediction accuracy</p>
+              <p class="project-card__highlight">Real-time risk assessment engine</p>
+              <p class="project-card__highlight">Full-stack Django web deployment</p>
+            </div>
+            <div class="project-card__actions">
+              <a href="#playground" class="btn btn--ghost btn--sm">🧪 Try Demo</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== ML PLAYGROUND ===== -->
+  <section class="section playground" id="playground">
+    <div class="container">
+      <div class="section__header reveal">
+        <span class="section__label">🧪 Interactive Lab</span>
+        <h2 class="section__title">ML Playground</h2>
+        <div class="divider"></div>
+        <p class="section__subtitle">Play with live ML simulations — tweak the inputs and watch predictions change instantly.</p>
+      </div>
+
+      <div class="playground__grid reveal">
+        <!-- Loan Approval Simulator -->
+        <div class="playground-sim" id="sim-loan">
+          <div class="playground-sim__header">
+            <div class="playground-sim__icon playground-sim__icon--loan">🏦</div>
+            <div>
+              <h3 class="playground-sim__title">Loan Eligibility Predictor</h3>
+              <p class="playground-sim__subtitle">Simulates loan approval probability</p>
+            </div>
+          </div>
+          <div class="playground-sim__controls">
+            <div class="sim-control">
+              <div class="sim-control__label">
+                <span>Applicant Income (₹/mo)</span>
+                <span class="sim-control__value" id="loan-income-val">₹50,000</span>
+              </div>
+              <input type="range" id="loan-income" min="10000" max="200000" value="50000" step="5000" />
+            </div>
+            <div class="sim-control">
+              <div class="sim-control__label">
+                <span>Loan Amount (₹)</span>
+                <span class="sim-control__value" id="loan-amount-val">₹150,000</span>
+              </div>
+              <input type="range" id="loan-amount" min="20000" max="1000000" value="150000" step="10000" />
+            </div>
+            <div class="sim-control">
+              <div class="sim-control__label">
+                <span>Loan Term (months)</span>
+                <span class="sim-control__value" id="loan-term-val">360</span>
+              </div>
+              <input type="range" id="loan-term" min="12" max="480" value="360" step="12" />
+            </div>
+            <div class="sim-control">
+              <div class="sim-control__label">
+                <span>Credit History</span>
+              </div>
+              <select id="loan-credit">
+                <option value="1">Good (1)</option>
+                <option value="0">Bad (0)</option>
+              </select>
+            </div>
+            <div class="sim-control">
+              <div class="sim-control__label">
+                <span>Property Area</span>
+              </div>
+              <select id="loan-area">
+                <option value="urban">Urban</option>
+                <option value="semiurban">Semi-Urban</option>
+                <option value="rural">Rural</option>
+              </select>
+            </div>
+          </div>
+          <div class="playground-sim__result" id="loan-result">
+            <span class="result__label">Approval Probability</span>
+            <span class="result__value" id="loan-result-value">—</span>
+            <span class="result__detail" id="loan-result-detail">Adjust inputs to see prediction</span>
+            <div class="result__bar"><div class="result__bar-fill" id="loan-result-bar" style="width: 0%"></div></div>
+          </div>
+        </div>
+
+        <!-- Insurance Cost Simulator -->
+        <div class="playground-sim" id="sim-insurance">
+          <div class="playground-sim__header">
+            <div class="playground-sim__icon playground-sim__icon--insurance">🏥</div>
+            <div>
+              <h3 class="playground-sim__title">Insurance Premium Estimator</h3>
+              <p class="playground-sim__subtitle">Estimates health insurance costs</p>
+            </div>
+          </div>
+          <div class="playground-sim__controls">
+            <div class="sim-control">
+              <div class="sim-control__label">
+                <span>Age</span>
+                <span class="sim-control__value" id="ins-age-val">30</span>
+              </div>
+              <input type="range" id="ins-age" min="18" max="65" value="30" step="1" />
+            </div>
+            <div class="sim-control">
+              <div class="sim-control__label">
+                <span>BMI</span>
+                <span class="sim-control__value" id="ins-bmi-val">25.0</span>
+              </div>
+              <input type="range" id="ins-bmi" min="15" max="50" value="25" step="0.5" />
+            </div>
+            <div class="sim-control">
+              <div class="sim-control__label">
+                <span>Children</span>
+                <span class="sim-control__value" id="ins-children-val">0</span>
+              </div>
+              <input type="range" id="ins-children" min="0" max="5" value="0" step="1" />
+            </div>
+            <div class="sim-control">
+              <div class="sim-control__label">
+                <span>Smoker</span>
+              </div>
+              <div class="sim-toggle">
+                <div class="sim-toggle__switch" id="ins-smoker" data-active="false"></div>
+                <span class="sim-toggle__label" id="ins-smoker-label">No</span>
+              </div>
+            </div>
+            <div class="sim-control">
+              <div class="sim-control__label">
+                <span>Region</span>
+              </div>
+              <select id="ins-region">
+                <option value="southwest">Southwest</option>
+                <option value="southeast">Southeast</option>
+                <option value="northwest">Northwest</option>
+                <option value="northeast">Northeast</option>
+              </select>
+            </div>
+          </div>
+          <div class="playground-sim__result" id="ins-result">
+            <span class="result__label">Estimated Annual Premium</span>
+            <span class="result__value" id="ins-result-value">—</span>
+            <span class="result__detail" id="ins-result-detail">Adjust inputs to see prediction</span>
+            <div class="result__bar"><div class="result__bar-fill" id="ins-result-bar" style="width: 0%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== EXPERIENCE & EDUCATION ===== -->
+  <section class="section section--alt" id="experience">
+    <div class="container">
+      <div class="section__header reveal">
+        <span class="section__label">📋 Background</span>
+        <h2 class="section__title">Experience & Education</h2>
+        <div class="divider"></div>
+      </div>
+
+      <div class="timeline-section reveal">
+        <!-- Experience Column -->
+        <div class="timeline-column">
+          <h3 class="timeline-column__title">
+            <span class="timeline-column__icon">💼</span> Work Experience
+          </h3>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-item__dot timeline-item__dot--active"></div>
+              <span class="timeline-item__date">Feb 2026 — Present</span>
+              <h4 class="timeline-item__title">Data Science Intern</h4>
+              <p class="timeline-item__company">Technoworld Softwares, Pune</p>
+              <p class="timeline-item__desc">
+                Building ML models on real-world datasets. Performing EDA, feature engineering, and model evaluation using Scikit-learn. Working on production data pipelines.
+              </p>
+              <span class="badge badge--green timeline-item__badge">🟢 Currently Active</span>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-item__dot timeline-item__dot--active"></div>
+              <span class="timeline-item__date">Jan 2026 — Present</span>
+              <h4 class="timeline-item__title">Python Developer Intern</h4>
+              <p class="timeline-item__company">QSpiders, Pune</p>
+              <p class="timeline-item__desc">
+                Strengthening core Python OOP skills, SQL integration, debugging, and building mini-projects. Gaining hands-on software development experience.
+              </p>
+              <span class="badge badge--green timeline-item__badge">🟢 Currently Active</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Education Column -->
+        <div class="timeline-column">
+          <h3 class="timeline-column__title">
+            <span class="timeline-column__icon">🎓</span> Education
+          </h3>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-item__dot timeline-item__dot--active"></div>
+              <span class="timeline-item__date">2022 — 2026</span>
+              <h4 class="timeline-item__title">B.E. Information Technology</h4>
+              <p class="timeline-item__company">Savitribai Phule Pune University (SPPU)</p>
+              <p class="timeline-item__desc">CGPA: 8.54 — Focus on AI/ML, Data Science, and Software Engineering.</p>
+              <span class="badge badge--primary timeline-item__badge">⭐ 8.54 CGPA</span>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-item__dot"></div>
+              <span class="timeline-item__date">2021 — 2022</span>
+              <h4 class="timeline-item__title">HSC (12th Grade)</h4>
+              <p class="timeline-item__company">Dhanaji Nana Mahavidyalaya, Faizpur</p>
+              <p class="timeline-item__desc">Scored 75.00% — Science stream.</p>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-item__dot"></div>
+              <span class="timeline-item__date">2019 — 2020</span>
+              <h4 class="timeline-item__title">SSC (10th Grade)</h4>
+              <p class="timeline-item__company">G.G. Bendale High School, Vivare Bk</p>
+              <p class="timeline-item__desc">Scored 79.20%.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== CERTIFICATIONS ===== -->
+  <section class="section" id="certifications">
+    <div class="container">
+      <div class="section__header reveal">
+        <span class="section__label">🏆 Credentials</span>
+        <h2 class="section__title">Certifications & Honors</h2>
+        <div class="divider"></div>
+      </div>
+
+      <div class="certs__grid reveal">
+        <div class="cert-card">
+          <span class="cert-card__icon">🎓</span>
+          <p class="cert-card__org">IIT Roorkee (iHUB DivyaSampark)</p>
+          <h4 class="cert-card__title">Professional Certification in Data Science & AI</h4>
+          <p class="cert-card__desc">Comprehensive training in advanced ML, deep learning, statistical modeling, and AI application design.</p>
+          <button class="btn btn--outline btn--sm" onclick="openCertModal('iit')" style="margin-top: 0.75rem;">
+            👁️ View Certificate Credential
+          </button>
+        </div>
+        <div class="cert-card">
+          <span class="cert-card__icon">🗃️</span>
+          <p class="cert-card__org">Intellipaat</p>
+          <h4 class="cert-card__title">SQL Course Certification</h4>
+          <p class="cert-card__desc">Mastery in complex SQL queries, JOINs, subqueries, indexing, schema design, and MySQL database administration.</p>
+          <button class="btn btn--outline btn--sm" onclick="openCertModal('sql')" style="margin-top: 0.75rem;">
+            👁️ View Certificate Credential
+          </button>
+        </div>
+        <div class="cert-card">
+          <span class="cert-card__icon">📊</span>
+          <p class="cert-card__org">R3 Sys</p>
+          <h4 class="cert-card__title">Power BI Certification</h4>
+          <p class="cert-card__desc">Interactive dashboard design, DAX data modeling, and business intelligence visualization.</p>
+          <button class="btn btn--outline btn--sm" onclick="openCertModal('powerbi')" style="margin-top: 0.75rem;">
+            👁️ View Certificate Credential
+          </button>
+        </div>
+        <div class="cert-card">
+          <span class="cert-card__icon">🤖</span>
+          <p class="cert-card__org">be10x</p>
+          <h4 class="cert-card__title">AI Tools & ChatGPT Workshop</h4>
+          <p class="cert-card__desc">Hands-on experience with AI-powered automation, prompt engineering, data analysis, and productivity tools.</p>
+          <button class="btn btn--outline btn--sm" onclick="openCertModal('ai')" style="margin-top: 0.75rem;">
+            👁️ View Certificate Credential
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== TERMINAL ===== -->
+  <section class="section section--dark" id="terminal-section">
+    <div class="container">
+      <div class="section__header reveal">
+        <span class="section__label" style="background: rgba(255,255,255,0.08); color: var(--clr-teal);">⌨️ Terminal</span>
+        <h2 class="section__title">Developer Console</h2>
+        <div class="divider"></div>
+        <p class="section__subtitle" style="color: var(--text-light);">Type <code class="mono" style="color: var(--clr-teal);">help</code> to see all available commands.</p>
+      </div>
+
+      <div class="terminal-wrapper reveal">
+        <div class="terminal" id="terminal">
+          <div class="terminal__header">
+            <span class="terminal__dot terminal__dot--red"></span>
+            <span class="terminal__dot terminal__dot--yellow"></span>
+            <span class="terminal__dot terminal__dot--green"></span>
+            <span class="terminal__title">dhanaraj@portfolio:~</span>
+          </div>
+          <div class="terminal__body" id="terminal-body">
+            <div class="terminal__line">
+              <span class="terminal__output terminal__output--info">Welcome to Dhanaraj's portfolio terminal! 🚀</span>
+            </div>
+            <div class="terminal__line">
+              <span class="terminal__output">Type <span class="terminal__output--highlight">help</span> to see available commands.</span>
+            </div>
+            <div class="terminal__line terminal__input-line">
+              <span class="terminal__prompt">visitor@portfolio:~$&nbsp;</span>
+              <input type="text" class="terminal__input" id="terminal-input" autocomplete="off" spellcheck="false" autofocus />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== CONTACT ===== -->
+  <section class="section section--alt" id="contact">
+    <div class="container">
+      <div class="section__header reveal">
+        <span class="section__label">📬 Get In Touch</span>
+        <h2 class="section__title">Let's Work Together</h2>
+        <div class="divider"></div>
+        <p class="section__subtitle">Have an opportunity, project idea, or just want to say hi? I'd love to hear from you!</p>
+      </div>
+
+      <div class="contact__grid reveal">
+        <!-- Left: Info -->
+        <div>
+          <div class="contact__info-cards">
+            <div class="contact-info-card" id="copy-email" title="Click to copy email">
+              <div class="contact-info-card__icon">📧</div>
+              <div>
+                <p class="contact-info-card__label">Email</p>
+                <p class="contact-info-card__value">lokhandedhanraj2410@gmail.com</p>
+              </div>
+            </div>
+            <div class="contact-info-card">
+              <div class="contact-info-card__icon">📱</div>
+              <div>
+                <p class="contact-info-card__label">Phone</p>
+                <p class="contact-info-card__value">+91 7507855698</p>
+              </div>
+            </div>
+            <div class="contact-info-card">
+              <div class="contact-info-card__icon">📍</div>
+              <div>
+                <p class="contact-info-card__label">Location</p>
+                <p class="contact-info-card__value">Pune, Maharashtra, India</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact__socials">
+            <a href="https://linkedin.com/in/dhanaraj-lokhande-a27536283" target="_blank" rel="noopener" class="social-btn" title="LinkedIn" aria-label="LinkedIn">
+              💼
+            </a>
+            <a href="https://github.com/DhanarajLokhande" target="_blank" rel="noopener" class="social-btn" title="GitHub" aria-label="GitHub">
+              🐙
+            </a>
+            <a href="mailto:lokhandedhanraj2410@gmail.com" class="social-btn" title="Email" aria-label="Email">
+              ✉️
+            </a>
+            <a href="https://wa.me/917507855698" target="_blank" rel="noopener" class="social-btn" title="WhatsApp" aria-label="WhatsApp">
+              💬
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Form -->
+        <form class="contact-form" id="contact-form" onsubmit="return false;">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="cf-name">Your Name</label>
+              <input type="text" id="cf-name" placeholder="John Doe" required />
+            </div>
+            <div class="form-group">
+              <label for="cf-email">Your Email</label>
+              <input type="email" id="cf-email" placeholder="john@example.com" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="cf-subject">Subject</label>
+            <input type="text" id="cf-subject" placeholder="Let's collaborate on..." />
+          </div>
+          <div class="form-group">
+            <label for="cf-message">Message</label>
+            <textarea id="cf-message" rows="5" placeholder="Tell me about your idea or opportunity..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary" id="cf-submit" style="align-self: flex-start;">
+            <span>🚀</span> Send Message
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div>
+        <p class="footer__brand">Dhanaraj Lokhande</p>
+        <p class="footer__copy">© 2026 — Built with ❤️ and Python vibes.</p>
+      </div>
+      <div class="footer__links">
+        <a href="#about" class="footer__link">About</a>
+        <a href="#resume" class="footer__link">Resume</a>
+        <a href="#projects" class="footer__link">Projects</a>
+        <a href="#playground" class="footer__link">Demos</a>
+        <a href="#contact" class="footer__link">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- Floating AI Assistant Chatbot Widget -->
+  <button class="chatbot-toggle" id="chatbot-toggle" aria-label="Open AI Assistant">🤖</button>
+  <div class="chatbot-window" id="chatbot-window">
+    <div class="chatbot-header">
+      <h3>🤖 Ask Dhanaraj AI (Recruiter Assistant)</h3>
+      <button class="chatbot-close" id="chatbot-close" aria-label="Close chat">✕</button>
+    </div>
+    <div class="chatbot-messages" id="chatbot-messages"></div>
+    <div class="chatbot-suggestions">
+      <button class="chat-suggestion">What skills does Dhanaraj have?</button>
+      <button class="chat-suggestion">What Machine Learning projects has he built?</button>
+      <button class="chat-suggestion">What Python projects has he completed?</button>
+      <button class="chat-suggestion">What internships does he have?</button>
+      <button class="chat-suggestion">What certifications does he have?</button>
+      <button class="chat-suggestion">Is he available for work?</button>
+      <button class="chat-suggestion">What roles is he looking for?</button>
+      <button class="chat-suggestion">Why should we hire him?</button>
+    </div>
+    <div class="chatbot-input">
+      <input type="text" id="chatbot-input" placeholder="Ask about resume, skills, or paste JD..." aria-label="Chat message">
+      <button id="chatbot-send" aria-label="Send message">➤</button>
+    </div>
+  </div>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Scripts -->
+  <script src="js/particles.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/chatbot.js"></script>
+  <script src="js/resume-hub.js"></script>
+  <script src="js/playground.js"></script>
+  <script src="js/terminal.js"></script>
+</body>
+</html>
