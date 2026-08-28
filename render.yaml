@@ -2,7 +2,7 @@ services:
   - type: web
     name: dhanaraj-portfolio
     env: python
-    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate && python manage.py seed_data
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate && python manage.py seed_data && python manage.py createadmin
     startCommand: gunicorn config.wsgi:application
     envVars:
       - key: PYTHON_VERSION
