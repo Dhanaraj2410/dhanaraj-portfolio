@@ -123,8 +123,9 @@ CORS_ALLOWED_ORIGINS = config(
 
 # ─── External API Keys ───────────────────────────────────────────────────────
 OPENAI_API_KEY = config('OPENAI_API_KEY', default='')
-GITHUB_USERNAME = config('GITHUB_USERNAME', default='')
+GITHUB_USERNAME = config('GITHUB_USERNAME', default='Dhanaraj2410')
 GITHUB_TOKEN = config('GITHUB_TOKEN', default='')
+
 
 # ─── AI Rate Limiting ────────────────────────────────────────────────────────
 AI_RATE_LIMIT_PER_MINUTE = 10

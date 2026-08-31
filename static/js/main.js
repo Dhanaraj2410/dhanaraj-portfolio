@@ -342,12 +342,17 @@ function renderGitHub(container, data) {
         <div class="lang-bar">${langBarHTML}</div>
         <div class="lang-legend">${langLegendHTML}</div>
       </div>` : ''}
+    <div class="github-contribution-card" style="margin-top:var(--space-lg);text-align:center;background:var(--bg-card);padding:1.5rem;border-radius:var(--radius-lg);border:1px solid var(--border-color);">
+      <h4 style="margin-bottom:1rem;color:var(--text-primary);font-size:1rem;font-weight:600;">🔥 GitHub Contribution Activity (@${profile.username || 'Dhanaraj2410'})</h4>
+      <img src="https://ghchart.rshah.org/4070F4/${profile.username || 'Dhanaraj2410'}" alt="GitHub Contribution Graph" style="width:100%;max-width:750px;border-radius:6px;filter:contrast(1.1);" loading="lazy" />
+    </div>
     <div class="repos-grid" style="margin-top:var(--space-xl);">
       ${reposHTML || '<p class="text-center" style="color:var(--text-muted);">No repositories found.</p>'}
     </div>
     <div class="text-center" style="margin-top:var(--space-xl);">
-      <a href="${profile.html_url || '#'}" target="_blank" rel="noopener" class="btn btn-outline">
-        View Full GitHub Profile →
+      <a href="${profile.html_url || 'https://github.com/Dhanaraj2410'}" target="_blank" rel="noopener" class="btn btn-outline">
+        🐙 View Full GitHub Profile (@Dhanaraj2410) →
       </a>
     </div>`;
 }
+

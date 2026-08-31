@@ -18,11 +18,18 @@ def get_github_data():
     Uses 1-hour cache to respect API rate limits.
     Returns cached data if available and fresh.
     """
-    from core.models import GitHubCache
+    from core.models import GitHubCache, SiteSettings
 
-    username = settings.GITHUB_USERNAME
+    username = getattr(settings, 'GITHUB_USERNAME', '')
     if not username:
-        return {'success': False, 'error': 'GitHub username not configured.'}
+        try:
+            site = SiteSettings.load()
+            username = site.github_username
+        except Exception:
+            pass
+    if not username:
+        username = 'Dhanaraj2410'
+
 
     # Check cache
     cache = GitHubCache.objects.first()
