@@ -1,4 +1,4 @@
-# Dhanaraj AI/ML Portfolio & Career Showcase Platform
+# Dhanaraj Portfolio & Career Showcase Platform
 
 A modern, professional, interactive full-stack portfolio platform for **Dhanaraj Arjun Lokhande** — an aspiring AI/ML Engineer and Data Scientist. Built with Django, Django REST Framework, and a premium glassmorphic UI.
 
