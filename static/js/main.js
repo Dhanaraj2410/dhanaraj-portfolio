@@ -257,22 +257,15 @@ async function fetchGitHubData(container) {
     const data = await response.json();
 
     if (!data.success) {
-      container.innerHTML = `
-        <div class="text-center" style="color: var(--text-muted); padding: 2rem;">
-          <p>GitHub data is currently unavailable.</p>
-          <p style="font-size: 0.8rem; margin-top: 0.5rem;">Configure GITHUB_USERNAME in settings to enable.</p>
-        </div>`;
+      console.log('GitHub API info:', data.error);
       return;
     }
 
     renderGitHub(container, data);
   } catch (err) {
     console.error('GitHub fetch error:', err);
-    container.innerHTML = `
-      <div class="text-center" style="color: var(--text-muted); padding: 2rem;">
-        <p>Could not load GitHub data.</p>
-      </div>`;
   }
+
 }
 
 function renderGitHub(container, data) {
