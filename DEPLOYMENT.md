@@ -29,8 +29,11 @@ Render will host your full-stack Django site live at `https://dhanaraj-portfolio
    - **Instance Type**: `Free`
 5. **Environment Variables**:
    - `DEBUG`: `False`
-   - `ALLOWED_HOSTS`: `*`
+   - `ALLOWED_HOSTS`: `dhanaraj-portfolio.onrender.com` (plus any custom domain)
    - `SECRET_KEY`: `(click Generate)`
+   - Configure `EMAIL_HOST`, `EMAIL_PORT`, `EMAIL_HOST_USER`, `EMAIL_HOST_PASSWORD`,
+     and `EMAIL_USE_TLS` to enable contact notifications. Set `CONTACT_EMAIL` if
+     notifications should go to a different address.
 6. Click **Create Web Service**! Render will deploy your application automatically.
 
 ---

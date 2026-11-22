@@ -12,7 +12,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # ─── Security ─────────────────────────────────────────────────────────────────
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-dev-key-change-in-production')
 DEBUG = config('DEBUG', default=True, cast=bool)
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = config(
+    'ALLOWED_HOSTS',
+    default='localhost,127.0.0.1',
+    cast=Csv(),
+)
 
 # ─── Application Definition ──────────────────────────────────────────────────
 INSTALLED_APPS = [
@@ -126,6 +130,20 @@ OPENAI_API_KEY = config('OPENAI_API_KEY', default='')
 GITHUB_USERNAME = config('GITHUB_USERNAME', default='Dhanaraj2410')
 GITHUB_TOKEN = config('GITHUB_TOKEN', default='')
 
+# Email notifications for contact form submissions
+EMAIL_HOST = config('EMAIL_HOST', default='')
+EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
+CONTACT_EMAIL = config(
+    'CONTACT_EMAIL',
+    default=EMAIL_HOST_USER or 'lokhandedhanraj2410@gmail.com',
+)
+DEFAULT_FROM_EMAIL = config(
+    'DEFAULT_FROM_EMAIL',
+    default=EMAIL_HOST_USER or CONTACT_EMAIL,
+)
 
 # ─── AI Rate Limiting ────────────────────────────────────────────────────────
 AI_RATE_LIMIT_PER_MINUTE = 10

@@ -1,6 +1,11 @@
 """
 Template views for the portfolio website.
 """
+import logging
+from smtplib import SMTPException
+
+from django.conf import settings
+from django.core.mail import send_mail
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
@@ -100,10 +105,6 @@ def project_detail(request, slug):
     return render(request, 'project_detail.html', context)
 
 
-import logging
-from django.core.mail import send_mail
-from django.conf import settings
-
 logger = logging.getLogger(__name__)
 
 
@@ -114,19 +115,17 @@ def contact_submit(request):
     if form.is_valid():
         msg_obj = form.save()
 
-        # Send email notification if SMTP is configured
-        try:
-            admin_email = getattr(settings, 'EMAIL_HOST_USER', '') or 'lokhandedhanraj2410@gmail.com'
-            if getattr(settings, 'EMAIL_HOST', None):
+        if settings.EMAIL_HOST and settings.CONTACT_EMAIL:
+            try:
                 send_mail(
                     subject=f"New Portfolio Contact Message from {msg_obj.name}",
                     message=f"Name: {msg_obj.name}\nEmail: {msg_obj.email}\nCompany: {msg_obj.company}\nRole: {msg_obj.job_role}\n\nMessage:\n{msg_obj.message}",
-                    from_email=admin_email,
-                    recipient_list=[admin_email],
-                    fail_silently=True,
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=[settings.CONTACT_EMAIL],
+                    fail_silently=False,
                 )
-        except Exception as e:
-            logger.warning(f"Could not send email notification: {e}")
+            except (OSError, SMTPException) as exc:
+                logger.warning("Could not send contact notification email: %s", exc)
 
         return JsonResponse({
             'success': True,

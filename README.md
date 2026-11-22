@@ -59,6 +59,10 @@ cp .env.example .env
 # - GITHUB_USERNAME (your GitHub username)
 # - OPENAI_API_KEY (optional, for AI chatbot/analyzer)
 # - GITHUB_TOKEN (optional, for higher API rate limits)
+# - ALLOWED_HOSTS (comma-separated hostnames; defaults to localhost)
+# - EMAIL_HOST, EMAIL_PORT, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD,
+#   EMAIL_USE_TLS, and DEFAULT_FROM_EMAIL (optional, for contact email)
+# - CONTACT_EMAIL (optional notification recipient; defaults to the portfolio contact address)
 ```
 
 ### 5. Run Database Migrations
