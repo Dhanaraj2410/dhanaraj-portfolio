@@ -349,3 +349,20 @@ function renderGitHub(container, data) {
     </div>`;
 }
 
+
+// ── Quick Copy-to-Clipboard Utility ──
+function copyTextToClipboard(text, successMsg) {
+  if (!navigator.clipboard) return;
+  navigator.clipboard.writeText(text).then(() => {
+    const toast = document.createElement('div');
+    toast.className = 'copy-toast';
+    toast.textContent = successMsg || 'Copied to clipboard!';
+    toast.style.cssText = 'position:fixed;bottom:24px;right:24px;background:#6366f1;color:#fff;padding:10px 18px;border-radius:8px;font-weight:600;font-size:0.9rem;box-shadow:0 8px 24px rgba(0,0,0,0.25);z-index:9999;transition:opacity 0.3s;';
+    document.body.appendChild(toast);
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      setTimeout(() => toast.remove(), 300);
+    }, 2200);
+  });
+}
+window.copyTextToClipboard = copyTextToClipboard;
