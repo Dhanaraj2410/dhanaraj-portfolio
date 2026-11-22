@@ -146,7 +146,7 @@ class Experience(models.Model):
 class Project(models.Model):
     """Portfolio projects."""
     title = models.CharField(max_length=300)
-    slug = models.SlugField(max_length=300, unique=True)
+    slug = models.SlugField(max_length=255, unique=True)  # max 255 for MySQL utf8mb4 unique index
     short_description = models.TextField(help_text='Brief description for project cards')
     description = models.TextField(help_text='Full project description')
     problem_statement = models.TextField(blank=True)

@@ -91,7 +91,7 @@ class ProjectAdmin(admin.ModelAdmin):
     list_editable = ['is_featured', 'order']
     list_filter = ['is_featured']
     prepopulated_fields = {'slug': ('title',)}
-    search_fields = ['title', 'description']
+    search_fields = ['title', 'algorithm', 'description', 'problem_statement']
     inlines = [ProjectTechnologyInline, ProjectWorkflowStepInline]
     fieldsets = (
         ('Basic Information', {

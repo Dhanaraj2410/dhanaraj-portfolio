@@ -173,7 +173,7 @@ def _recruiter_smart_chat(user_message):
             'response': (
                 f"🌟 **Recruiter Executive Summary — {name}**\n\n"
                 "🎓 **Status:** 2026 Fresh Graduate | B.E. IT at SPPU (8.54 CGPA)\n"
-                "💼 **Current Internships:** Data Science Intern @ Technoworld Softwares & Python Developer Intern @ QSpiders\n"
+                "💼 **Experience:** AI Trainee @ Plainsurf Solutions (Present) | Ex-Data Science Intern @ Technoworld & Python Intern @ QSpiders\n"
                 "📜 **Certification:** IIT Roorkee Certified in Data Science & AI\n"
                 "🎯 **Target Entry-Level Roles:** Python Developer | Data Analyst | Data Science | AI/ML Engineer | SQL Developer\n\n"
                 "✨ **Key Value Proposition:** Strong mathematical and coding foundation, hands-on production ML project experience, "
@@ -182,7 +182,7 @@ def _recruiter_smart_chat(user_message):
         }
 
     # 3. Project Questions
-    if any(w in msg for w in ['project', 'built', 'developed', 'interview platform', 'insurepredict', 'loan']):
+    if any(w in msg for w in ['project', 'built', 'developed', 'rag', 'document intelligence', 'faiss', 'interview platform', 'insurepredict', 'loan']):
         projects = Project.objects.all()
         lines = []
         for p in projects:
@@ -203,7 +203,7 @@ def _recruiter_smart_chat(user_message):
             'response': (
                 f"⚡ **Technical Skills Breakdown for {name}:**\n\n"
                 "🐍 **Languages:** Python (Advanced), SQL (MySQL), JavaScript, HTML5/CSS3\n"
-                "🤖 **ML & AI:** Scikit-learn, TensorFlow, Keras, NLP, OpenAI API, Feature Engineering\n"
+                "🤖 **ML, Deep Learning & GenAI:** Scikit-learn, TensorFlow, Keras, NLP, RAG, FAISS, Sentence Transformers, LLMs, OpenAI API\n"
                 "📊 **Data & BI:** Pandas, NumPy, Matplotlib, Seaborn, Power BI, Excel Charts\n"
                 "🏗️ **Backend & Web:** Django, RESTful APIs, MySQL Workbench, Git & GitHub\n\n"
                 "🎓 Certified by **IIT Roorkee (Data Science & AI)** and **Intellipaat (SQL)**."
@@ -211,7 +211,7 @@ def _recruiter_smart_chat(user_message):
         }
 
     # 5. Internships & Experience
-    if any(w in msg for w in ['experience', 'intern', 'company', 'technoworld', 'qspiders', 'work']):
+    if any(w in msg for w in ['experience', 'intern', 'company', 'plainsurf', 'technoworld', 'qspiders', 'work', 'trainee']):
         exps = Experience.objects.all()
         exp_text = []
         for e in exps:

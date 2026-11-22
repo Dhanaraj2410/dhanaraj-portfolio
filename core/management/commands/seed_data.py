@@ -101,47 +101,147 @@ class Command(BaseCommand):
         Experience.objects.all().delete()
         experience_data = [
             {
-                'title': 'Data Science Intern',
-                'company': 'Technoworld Softwares',
-                'location': 'Pune',
-                'start_date': date(2026, 2, 1),
+                'title': 'AI Trainee',
+                'company': 'Plainsurf Solutions Pvt Ltd',
+                'location': 'Pune, Maharashtra, India',
+                'start_date': date(2026, 10, 1),
+                'end_date': None,
                 'is_current': True,
                 'responsibilities': (
-                    'Python programming and scripting\n'
-                    'Machine Learning model development and evaluation\n'
-                    'Exploratory Data Analysis (EDA)\n'
-                    'SQL database queries and operations\n'
-                    'Scikit-learn for model building\n'
-                    'Working with real-world datasets\n'
-                    'Data preprocessing and feature engineering'
+                    '• Working on AI/ML solutions using Python, NLP, and Generative AI techniques.\n'
+                    '• Applying machine learning, LLM, and RAG concepts to build and test AI-powered applications.'
                 ),
                 'order': 1,
             },
             {
-                'title': 'Python Developer Intern',
-                'company': 'QSpiders',
-                'location': 'Pune',
-                'start_date': date(2026, 1, 1),
-                'is_current': True,
+                'title': 'Data Science Intern',
+                'company': 'Technoworld Softwares',
+                'location': 'Pune, Maharashtra, India',
+                'start_date': date(2026, 2, 1),
+                'end_date': date(2026, 7, 31),
+                'is_current': False,
                 'responsibilities': (
-                    'Python development\n'
-                    'Object-Oriented Programming (OOP)\n'
-                    'SQL database operations\n'
-                    'Mini projects development\n'
-                    'Debugging and problem solving'
+                    '• Performed data cleaning, EDA, and visualization using Python, Pandas, NumPy, and SQL to identify patterns and support data-driven insights.\n'
+                    '• Built and evaluated ML models using Scikit-learn; developed Power BI dashboards and Excel reports for data analysis and KPI reporting.'
                 ),
                 'order': 2,
+            },
+            {
+                'title': 'Python Intern',
+                'company': 'QSpiders',
+                'location': 'Pune, Maharashtra, India',
+                'start_date': date(2026, 1, 1),
+                'end_date': date(2026, 10, 31),
+                'is_current': False,
+                'responsibilities': (
+                    '• Developed Django applications and REST APIs using Python, OOP, SQL/MySQL, and CRUD operations.\n'
+                    '• Debugged and tested applications to ensure reliable data flow and application stability.'
+                ),
+                'order': 3,
             },
         ]
         for exp in experience_data:
             Experience.objects.create(**exp)
-        self.stdout.write(self.style.SUCCESS('  [OK] Experience (2 internships)'))
+        self.stdout.write(self.style.SUCCESS('  [OK] Experience (3 industry roles)'))
 
         # ─── Projects ────────────────────────────────────────────────
         Project.objects.all().delete()
 
-        # Project 1: AI-Powered Mock Interview Platform
+        # Project 1: AI-Powered Document Intelligence & RAG Assistant
         p1 = Project.objects.create(
+            title='AI-Powered Document Intelligence & RAG Assistant',
+            slug='ai-powered-document-intelligence-rag-assistant',
+            short_description='RAG system for semantic search, document summarization, and PDF Q&A using Python, Django, DRF, PostgreSQL, FAISS, Sentence Transformers, OpenAI API, and Docker.',
+            description=(
+                'Engineered an enterprise-grade Document Intelligence and Retrieval-Augmented Generation (RAG) system '
+                'capable of ingesting complex PDF documents, extracting textual semantics, generating dense vector '
+                'embeddings using Sentence Transformers, and indexing with FAISS for sub-millisecond similarity retrieval. '
+                'Integrated the OpenAI API for LLM-powered context synthesis, document summarization, and multi-document Q&A. '
+                'Exposed robust REST APIs via Django REST Framework (DRF) backed by PostgreSQL and fully containerized with Docker.'
+            ),
+            problem_statement='Enterprise users spend hours manually reading long PDF reports and documentation to extract relevant business answers and data.',
+            solution='An intelligent RAG pipeline performing semantic chunking, vector indexing with FAISS, and high-precision Q&A with LLM citation grounding.',
+            features=(
+                'Semantic vector search\n'
+                'Multi-document PDF Q&A\n'
+                'Document summarization\n'
+                'FAISS dense vector index\n'
+                'Sentence Transformers embeddings\n'
+                'OpenAI GPT context synthesis\n'
+                'Django REST Framework APIs\n'
+                'Dockerized microservice architecture'
+            ),
+            algorithm='Retrieval-Augmented Generation (RAG), FAISS, Sentence Transformers, OpenAI API',
+            dataset_info='Diverse multi-domain enterprise PDF corpora and technical documentation',
+            results='Sub-500ms retrieval latency across extensive PDF corpora with grounded source citations',
+            challenges='Optimizing chunk overlapping and vector search indexing for multi-page documents with complex tables',
+            future_improvements='Incorporate hybrid sparse-dense retrieval (BM25 + FAISS) and multi-modal image document extraction',
+            github_url='https://github.com/Dhanaraj2410/AI-Powered-Document-IntelligenceRAG-Assistant',
+            live_demo_url='https://dhanaraj-portfolio-4az6.onrender.com',
+            is_featured=True,
+            order=1,
+        )
+        for i, tech in enumerate(['Python', 'Django', 'DRF', 'PostgreSQL', 'FAISS', 'Sentence Transformers', 'OpenAI API', 'Docker']):
+            ProjectTechnology.objects.create(project=p3, name=tech, order=i)
+        for i, (title, desc) in enumerate([
+            ('Document Ingestion', 'Upload and parse multi-page PDF documents'),
+            ('Text Extraction & Chunking', 'Recursive character and semantic chunking with overlap'),
+            ('Embedding Generation', 'Dense vector generation via Sentence Transformers'),
+            ('FAISS Vector Index', 'Index embeddings into FAISS vector space for fast similarity search'),
+            ('Query Processing', 'Vectorize recruiter or user query to find top-k relevant chunks'),
+            ('LLM Synthesis', 'Prompt OpenAI API with grounded context for accurate responses'),
+            ('Response & Citations', 'Return structured answer with page references and citations'),
+            ('REST API & Docker', 'Expose secure endpoints via DRF and containerize for deployment'),
+        ]):
+            ProjectWorkflowStep.objects.create(project=p3, title=title, description=desc, order=i)
+
+        # Project 2: Intelligent Loan Risk Assessment & Prediction Platform
+        p2 = Project.objects.create(
+            title='Intelligent Loan Risk Assessment & Prediction Platform',
+            slug='intelligent-loan-risk-assessment-prediction-platform',
+            short_description='Machine Learning & Deep Learning loan risk assessment platform using XGBoost, Random Forest, Logistic Regression, and ANN with model comparison and financial calculations.',
+            description=(
+                'Developed an intelligent end-to-end Loan Risk Assessment & Prediction Platform utilizing multiple ML and Deep Learning '
+                'architectures including XGBoost, Random Forest, Logistic Regression, and Artificial Neural Networks (ANN). '
+                'Engineered automated preprocessing pipelines, cross-validation, hyperparameter tuning, model comparison benchmarks, '
+                'financial calculations (EMI, debt-to-income ratio), and complete historical prediction tracking with MySQL.'
+            ),
+            problem_statement='Financial institutions require accurate, multi-model risk assessment to predict loan defaults and calculate optimal terms.',
+            solution='Created a comprehensive risk intelligence platform featuring automated feature engineering, ensemble ML models, ANN neural architecture, and loan metric calculators.',
+            features=(
+                'Multi-model comparison (XGBoost, Random Forest, Logistic Regression, ANN)\n'
+                'Real-time loan eligibility prediction\n'
+                'Automated feature engineering & outlier handling\n'
+                'Cross-validation & hyperparameter tuning\n'
+                'Financial risk calculators (EMI & DTI)\n'
+                'Historical prediction audit logging\n'
+                'Full-stack Django & MySQL database deployment'
+            ),
+            algorithm='XGBoost, Random Forest, Logistic Regression, Artificial Neural Networks (ANN)',
+            dataset_info='Financial loan application datasets with applicant credit history, income, loan amount, and property area',
+            results='High predictive precision (86%+ accuracy) with cross-model comparative performance benchmarking',
+            challenges='Balancing precision and recall on imbalanced credit default distributions',
+            future_improvements='Deploy continuous model drift monitoring and integrate automated credit bureau API feeds',
+            github_url='https://github.com/Dhanaraj2410/Intelligent-Loan-Risk-Assessment-Prediction-Platform',
+            live_demo_url='https://dhanaraj-portfolio-4az6.onrender.com',
+            is_featured=True,
+            order=2,
+        )
+        for i, tech in enumerate(['Python', 'Pandas', 'Scikit-learn', 'XGBoost', 'TensorFlow/Keras', 'MySQL', 'Django']):
+            ProjectTechnology.objects.create(project=p4, name=tech, order=i)
+        for i, (title, desc) in enumerate([
+            ('Applicant Profile', 'Capture applicant financial, demographic, and credit data'),
+            ('Data Preprocessing', 'Impute missing values, scale features, and encode categorical inputs'),
+            ('Feature Engineering', 'Compute Debt-to-Income and Loan-to-Income ratios'),
+            ('Model Pipeline', 'Run inference through XGBoost, Random Forest, and ANN'),
+            ('Risk Scoring', 'Calculate risk probability and decision threshold confidence'),
+            ('Financial Calculations', 'Compute monthly EMI and repayment amortization schedule'),
+            ('Audit Logging', 'Store input records and risk prediction history in MySQL'),
+        ]):
+            ProjectWorkflowStep.objects.create(project=p4, title=title, description=desc, order=i)
+
+        # Project 3: AI-Powered Mock Interview Platform
+        p3 = Project.objects.create(
             title='AI-Powered Mock Interview Platform',
             slug='ai-mock-interview-platform',
             short_description='AI-based interview platform using Python, Django, NLP, and OpenAI API for automated mock interviews with resume analysis and performance evaluation.',
@@ -167,10 +267,10 @@ class Command(BaseCommand):
             challenges='Integrating NLP for accurate answer evaluation and handling diverse interview domains',
             future_improvements='Add multilingual support, video interview capability, and industry-specific question banks',
             is_featured=True,
-            order=1,
+            order=3,
         )
         for i, tech in enumerate(['Python', 'NLP', 'Machine Learning', 'Django', 'React', 'Spring Boot', 'MySQL', 'OpenAI API']):
-            ProjectTechnology.objects.create(project=p1, name=tech, order=i)
+            ProjectTechnology.objects.create(project=p3, name=tech, order=i)
         for i, (title, desc) in enumerate([
             ('Candidate', 'User initiates the interview process'),
             ('Resume Upload', 'Candidate uploads their resume'),
@@ -181,10 +281,10 @@ class Command(BaseCommand):
             ('Performance Evaluation', 'System scores and evaluates overall performance'),
             ('Feedback & Score', 'Detailed feedback and score provided to candidate'),
         ]):
-            ProjectWorkflowStep.objects.create(project=p1, title=title, description=desc, order=i)
+            ProjectWorkflowStep.objects.create(project=p3, title=title, description=desc, order=i)
 
         # Project 2: InsurePredict
-        p2 = Project.objects.create(
+        p4 = Project.objects.create(
             title='InsurePredict – Insurance Cost Prediction',
             slug='insurepredict-insurance-cost-prediction',
             short_description='Machine learning system for predicting insurance costs using Linear Regression with 1300+ insurance records, featuring EDA, data preprocessing, and a Django web interface.',
@@ -210,10 +310,10 @@ class Command(BaseCommand):
             challenges='Handling outliers in insurance data and feature selection for optimal model performance',
             future_improvements='Implement ensemble methods, add more features, deploy as a REST API',
             is_featured=True,
-            order=2,
+            order=4,
         )
         for i, tech in enumerate(['Python', 'Scikit-learn', 'Django', 'SQL', 'HTML', 'CSS']):
-            ProjectTechnology.objects.create(project=p2, name=tech, order=i)
+            ProjectTechnology.objects.create(project=p4, name=tech, order=i)
         for i, (title, desc) in enumerate([
             ('Dataset', 'Load 1300+ insurance records'),
             ('Data Cleaning', 'Handle missing values and outliers'),
@@ -225,50 +325,9 @@ class Command(BaseCommand):
             ('Prediction', 'Generate real-time predictions'),
             ('Django Web Application', 'Deploy with interactive web interface'),
         ]):
-            ProjectWorkflowStep.objects.create(project=p2, title=title, description=desc, order=i)
+            ProjectWorkflowStep.objects.create(project=p4, title=title, description=desc, order=i)
 
-        # Project 3: Loan Approval Prediction
-        p3 = Project.objects.create(
-            title='AI-Powered Loan Approval Prediction System',
-            slug='ai-loan-approval-prediction',
-            short_description='Machine learning system for predicting loan approval using Logistic Regression with 86% accuracy, featuring user input form and Django backend with MySQL.',
-            description=(
-                'Built a loan approval prediction system using Python, Django, and Scikit-learn. '
-                'The system uses Logistic Regression to predict loan approval with 86% reported accuracy, '
-                'featuring a user-friendly input form and real-time predictions.'
-            ),
-            problem_statement='Banks and financial institutions need automated, data-driven loan approval decisions to reduce processing time and improve accuracy.',
-            solution='Developed a machine learning system using Logistic Regression that predicts loan approval based on applicant data, deployed through a Django web application with MySQL database.',
-            features=(
-                'User input form\n'
-                'Data preprocessing\n'
-                'ML prediction\n'
-                'Real-time prediction\n'
-                'Django backend\n'
-                'MySQL database\n'
-                'Approval/Rejection result display'
-            ),
-            algorithm='Logistic Regression',
-            results='86% reported accuracy on loan approval prediction',
-            challenges='Handling imbalanced classes in loan approval data and ensuring model fairness',
-            future_improvements='Implement more advanced algorithms, add explainability features, integrate with banking APIs',
-            is_featured=True,
-            order=3,
-        )
-        for i, tech in enumerate(['Python', 'Django', 'Machine Learning', 'Scikit-learn', 'MySQL', 'HTML5', 'CSS3', 'JavaScript']):
-            ProjectTechnology.objects.create(project=p3, name=tech, order=i)
-        for i, (title, desc) in enumerate([
-            ('User Input', 'Applicant enters loan details'),
-            ('Data Validation', 'Validate and sanitize input data'),
-            ('Preprocessing', 'Clean and prepare data for model'),
-            ('Feature Transformation', 'Transform features for model input'),
-            ('Logistic Regression Model', 'Run prediction model'),
-            ('Prediction', 'Generate approval probability'),
-            ('Approval / Rejection Result', 'Display decision to user'),
-        ]):
-            ProjectWorkflowStep.objects.create(project=p3, title=title, description=desc, order=i)
-
-        self.stdout.write(self.style.SUCCESS('  [OK] Projects (3 projects with technologies & workflows)'))
+        self.stdout.write(self.style.SUCCESS('  [OK] Projects (4 flagship projects with technologies & workflows)'))
 
         # ─── Skills ───────────────────────────────────────────────────
         Skill.objects.all().delete()

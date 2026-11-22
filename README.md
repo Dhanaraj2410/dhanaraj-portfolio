@@ -1,210 +1,135 @@
-# Dhanaraj Portfolio & Career Showcase Platform
+# Dhanaraj AI/ML Portfolio & Career Showcase Platform
 
-A modern, professional, interactive full-stack portfolio platform for **Dhanaraj Arjun Lokhande** — an aspiring AI/ML Engineer and Data Scientist. Built with Django, Django REST Framework, and a premium glassmorphic UI.
+A production-grade, interactive full-stack portfolio platform for **Dhanaraj Arjun Lokhande** — AI/ML Engineer, Data Scientist, and Generative AI Developer. Built with Python, Django, Django REST Framework, MySQL / PostgreSQL, and a modern glassmorphic responsive UI.
 
-## 🚀 Features
+[![Python](https://img.shields.io/badge/Python-3.12%2B-blue.svg?logo=python&logoColor=white)](https://python.org)
+[![Django](https://img.shields.io/badge/Django-5.1%2B-green.svg?logo=django&logoColor=white)](https://djangoproject.com)
+[![MySQL](https://img.shields.io/badge/MySQL-8.0%2B-orange.svg?logo=mysql&logoColor=white)](https://mysql.com)
+[![Render](https://img.shields.io/badge/Render-Deployed-purple.svg?logo=render&logoColor=white)](https://dhanaraj-portfolio-4az6.onrender.com)
+[![GitHub](https://img.shields.io/badge/GitHub-Dhanaraj2410-181717.svg?logo=github&logoColor=white)](https://github.com/Dhanaraj2410)
 
-| Feature | Description |
-|---|---|
-| **Single-Page Portfolio** | Hero, About, Resume, Skills, Projects, Experience, Certifications, GitHub, Activities |
-| **Django Admin Panel** | Update all content without changing code |
-| **REST API** | Full API at `/api/` for all portfolio data |
-| **AI Chatbot** | "Ask Dhanaraj AI" — answers questions about the profile |
-| **Resume Analyzer** | Paste a job description to get a skill match analysis |
-| **GitHub Integration** | Live GitHub data with 1-hour caching |
-| **Dark/Light Mode** | Theme toggle with localStorage persistence |
-| **Recruiter Dashboard** | Quick candidate snapshot for hiring managers |
-| **ML Workflow Visualization** | Animated pipeline for each project |
-| **Responsive Design** | Works on desktop, tablet, and mobile (375px–1920px) |
-| **SEO Optimized** | Meta tags, Open Graph, JSON-LD, sitemap, robots.txt |
+---
 
-## 📋 Prerequisites
+## 👨‍💻 Candidate Overview
 
-- Python 3.10+
-- pip
+- **Name**: Dhanaraj Arjun Lokhande
+- **Target Roles**: AI/ML Engineer | Data Scientist | Generative AI & RAG Developer | Python Backend Developer
+- **Education**: Bachelor of Engineering, Information Technology (2022–2026) — Savitribai Phule Pune University (SPPU) | **CGPA: 8.54**
+- **Location**: Pune, Maharashtra, India
+- **Email**: [lokhandedhanraj2410@gmail.com](mailto:lokhandedhanraj2410@gmail.com)
+- **LinkedIn**: [linkedin.com/in/dhanaraj-lokhande2410](https://www.linkedin.com/in/dhanaraj-lokhande2410)
+- **Live Portfolio**: [dhanaraj-portfolio-4az6.onrender.com](https://dhanaraj-portfolio-4az6.onrender.com)
 
-## 🛠️ Setup Instructions
+---
+
+## 🌟 Industry Experience
+
+1. **AI Trainee** | Plainsurf Solutions Pvt Ltd, Pune *(10/2026 – Present)*
+   - Developing AI/ML solutions using Python, NLP, and Generative AI (RAG) techniques.
+   - Applying machine learning, LLM, and dense vector search concepts to build and test production AI applications.
+2. **Data Science Intern** | Technoworld Softwares, Pune *(02/2026 – 07/2026)*
+   - Performed data cleaning, EDA, and statistical visualization using Python, Pandas, NumPy, and SQL.
+   - Trained and evaluated machine learning models with Scikit-learn; engineered Power BI dashboards and Excel reports for KPI tracking.
+3. **Python Intern** | QSpiders, Pune *(01/2026 – 10/2026)*
+   - Developed Django web applications and modular REST APIs using OOP, SQL/MySQL, and CRUD patterns.
+   - Debugged and tested database transactions ensuring stable, high-throughput backend data flows.
+
+---
+
+## 🚀 Flagship Projects
+
+| Project | Tech Stack | Highlights |
+|---|---|---|
+| **AI-Powered Document Intelligence & RAG Assistant** | Python, Django, DRF, PostgreSQL, FAISS, Sentence Transformers, OpenAI API, Docker | Enterprise RAG system for semantic search, multi-document summarization, PDF Q&A, and citation-grounded retrieval. |
+| **Intelligent Loan Risk Assessment & Prediction Platform** | Python, Pandas, Scikit-learn, XGBoost, TensorFlow/Keras, MySQL, Django | Multi-model risk prediction (XGBoost, Random Forest, Logistic Regression, ANN) with 86%+ accuracy, EMI/DTI calculators, and prediction history. |
+| **AI-Powered Mock Interview Platform** | Python, NLP, Django, React, MySQL, OpenAI API | Automated resume analysis, dynamic question generation, real-time candidate answer evaluation, and scoring feedback. |
+| **InsurePredict – Insurance Cost Prediction** | Python, Scikit-learn, Django, SQL, EDA, Seaborn | Medical insurance premium estimation using Linear Regression on 1,300+ records with full demographic EDA pipeline. |
+
+---
+
+## 📜 Certifications
+
+- **Professional Certification in Data Science & Artificial Intelligence** — IIT Roorkee, iHUB DivyaSampark
+- **SQL Course Certification** — Intellipaat
+- **Power BI Certification** — R3 Sys
+- **AI Tools and ChatGPT Workshop** — be10x
+
+---
+
+## 🛠️ Architecture & Features
+
+- **Multi-Database Support**: Seamless automatic switching between **MySQL** (via PyMySQL), **PostgreSQL** (via dj-database-url), and **SQLite** (for quick local development).
+- **Dynamic Content Administration**: Every project, skill, internship, certification, and timeline entry is fully manageable via the Django Admin panel at `/admin/`.
+- **RESTful API**: Clean REST API endpoints exposed via Django REST Framework at `/api/` with throttling and CORS headers.
+- **Interactive Recruiter Tools**: Live skill match analysis, role-tailored resume generation, and interactive terminal interface.
+- **Production-Ready Security**: WhiteNoise compressed static assets, CSRF protection, secure cookies, and automated superuser seeding.
+
+---
+
+## ⚡ Quick Start
 
 ### 1. Clone the Repository
-
 ```bash
-git clone <repository-url>
-cd portfolio
+git clone https://github.com/Dhanaraj2410/dhanaraj-portfolio.git
+cd dhanaraj-portfolio/portfolio
 ```
 
-### 2. Create Virtual Environment (Optional but Recommended)
-
+### 2. Set Up Virtual Environment
 ```bash
 python -m venv venv
-# Windows
+# Windows:
 venv\Scripts\activate
-# macOS/Linux
+# Linux/macOS:
 source venv/bin/activate
 ```
 
 ### 3. Install Dependencies
-
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Configure Environment Variables
-
+### 4. Configure Environment (`.env`)
 ```bash
-# Copy the example file
 cp .env.example .env
-
-# Edit .env and set:
-# - SECRET_KEY (generate a strong key for production)
-# - GITHUB_USERNAME (your GitHub username)
-# - OPENAI_API_KEY (optional, for AI chatbot/analyzer)
-# - GITHUB_TOKEN (optional, for higher API rate limits)
-# - ALLOWED_HOSTS (comma-separated hostnames; defaults to localhost)
-# - EMAIL_HOST, EMAIL_PORT, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD,
-#   EMAIL_USE_TLS, and DEFAULT_FROM_EMAIL (optional, for contact email)
-# - CONTACT_EMAIL (optional notification recipient; defaults to the portfolio contact address)
 ```
 
-### 5. Run Database Migrations
+Set these values in `.env` as needed:
+- `SECRET_KEY` (use a strong value in production)
+- `GITHUB_USERNAME` (your GitHub username)
+- `OPENAI_API_KEY` (optional, for AI chatbot/analyzer)
+- `GITHUB_TOKEN` (optional, for higher API rate limits)
+- `ALLOWED_HOSTS` (comma-separated hostnames; defaults to localhost)
+- `EMAIL_HOST`, `EMAIL_PORT`, `EMAIL_HOST_USER`, `EMAIL_HOST_PASSWORD`,
+  `EMAIL_USE_TLS`, and `DEFAULT_FROM_EMAIL` (optional, for contact email)
+- `CONTACT_EMAIL` (optional notification recipient)
 
+To run with **MySQL**:
+```env
+DB_ENGINE=mysql
+DB_NAME=dhanaraj_portfolio
+DB_USER=root
+DB_PASSWORD=your_mysql_password
+DB_HOST=localhost
+DB_PORT=3306
+```
+To run with **SQLite** (zero configuration):
+```env
+DB_ENGINE=sqlite
+```
+
+### 5. Initialize Database & Seed Resume Data
 ```bash
 python manage.py migrate
-```
-
-### 6. Seed the Database with Resume Data
-
-```bash
 python manage.py seed_data
 ```
 
-### 7. Create Admin Superuser
-
-```bash
-python manage.py createsuperuser
-```
-
-### 8. Start Development Server
-
+### 6. Run Development Server
 ```bash
 python manage.py runserver
 ```
+Visit `http://localhost:8000` to explore the live portfolio!
 
-Visit:
-- **Portfolio**: http://127.0.0.1:8000/
-- **Admin Panel**: http://127.0.0.1:8000/admin/
-- **API Root**: http://127.0.0.1:8000/api/
-
-## 📂 Project Structure
-
-```
-portfolio/
-├── manage.py
-├── config/               # Django settings & URL routing
-│   ├── settings.py
-│   ├── urls.py
-│   ├── wsgi.py
-│   └── asgi.py
-├── core/                 # Main portfolio app
-│   ├── models.py         # 14 Django models
-│   ├── admin.py          # Rich admin interface
-│   ├── views.py          # Template views
-│   ├── api_views.py      # REST API endpoints
-│   ├── serializers.py    # DRF serializers
-│   ├── forms.py          # Contact form
-│   ├── urls.py           # URL routing
-│   ├── sitemaps.py       # SEO sitemaps
-│   └── management/commands/seed_data.py
-├── ai_assistant/         # AI chatbot & resume analyzer
-│   ├── services.py       # OpenAI + fallback logic
-│   ├── views.py          # API endpoints
-│   └── urls.py
-├── github_integration/   # GitHub API proxy
-│   ├── services.py       # Fetching + caching
-│   ├── views.py          # API endpoint
-│   └── urls.py
-├── templates/            # Django templates
-│   ├── base.html
-│   ├── home.html
-│   ├── project_detail.html
-│   └── robots.txt
-├── static/
-│   ├── css/style.css     # Design system
-│   └── js/
-│       ├── main.js       # Core interactions
-│       ├── chatbot.js    # AI chatbot widget
-│       ├── resume-analyzer.js
-│       └── workflow.js   # ML pipeline visualization
-├── media/                # Uploaded files
-├── requirements.txt
-├── .env.example
-├── .gitignore
-└── README.md
-```
-
-## 🔌 API Endpoints
-
-| Endpoint | Method | Description |
-|---|---|---|
-| `/api/` | GET | API overview |
-| `/api/profile/` | GET | Profile data |
-| `/api/education/` | GET | Education list |
-| `/api/experience/` | GET | Experience list |
-| `/api/projects/` | GET | All projects |
-| `/api/projects/<slug>/` | GET | Project detail |
-| `/api/skills/` | GET | Skills list |
-| `/api/certifications/` | GET | Certifications |
-| `/api/activities/` | GET | Activities |
-| `/api/contact/` | POST | Submit contact message |
-| `/api/ai/chat/` | POST | AI chatbot |
-| `/api/ai/resume-analysis/` | POST | Resume analyzer |
-| `/api/github/` | GET | GitHub data |
-
-## 🔧 Django Admin
-
-Log in at `/admin/` to manage:
-- **Profile** — Name, bio, photo, resume PDF
-- **Education** — Degrees, institutions, scores
-- **Experience** — Internships, roles, responsibilities
-- **Projects** — Full project details, technologies, workflows
-- **Skills** — Categories, proficiency levels
-- **Certifications** — Titles, organizations, certificates
-- **Activities** — Career activities timeline
-- **Social Links** — GitHub, LinkedIn, etc.
-- **Contact Messages** — View recruiter messages
-- **Site Settings** — Taglines, GitHub username, meta description
-
-## 🤖 AI Features
-
-### Chatbot (Ask Dhanaraj AI)
-- Click the 🤖 button in the bottom-right
-- Uses OpenAI API if `OPENAI_API_KEY` is set
-- Falls back to rule-based responses otherwise
-
-### Resume Analyzer
-- Scroll to "AI Resume Analyzer" section
-- Paste a job description
-- Get skill match %, matching/missing skills, relevant projects
-
-## 🔒 Security
-
-- CSRF protection on all forms
-- Environment variables for secrets
-- Honeypot spam protection
-- Rate limiting on AI endpoints
-- Production security headers when `DEBUG=False`
-- API keys never exposed to frontend
-
-## 🚀 Production Deployment
-
-1. Set `DEBUG=False` in `.env`
-2. Set a strong `SECRET_KEY`
-3. Configure `ALLOWED_HOSTS`
-4. Set up PostgreSQL and update `DATABASES`
-5. Run `python manage.py collectstatic`
-6. Use Gunicorn: `gunicorn config.wsgi:application`
-7. Set up Nginx as reverse proxy
-8. Enable HTTPS
+---
 
 ## 📄 License
-
-This project is for personal portfolio use by Dhanaraj Arjun Lokhande.
+This project is open-source under the MIT License.

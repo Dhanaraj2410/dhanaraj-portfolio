@@ -90,8 +90,8 @@ class ProjectListSerializer(serializers.ModelSerializer):
         model = Project
         fields = [
             'id', 'title', 'slug', 'short_description', 'algorithm',
-            'github_url', 'live_demo_url', 'is_featured', 'technologies',
-            'features_list',
+            'github_url', 'live_demo_url', 'is_featured', 'order',
+            'technologies', 'features_list',
         ]
 
 

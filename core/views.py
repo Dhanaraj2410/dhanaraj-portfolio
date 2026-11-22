@@ -21,17 +21,17 @@ def home(request):
     """Render the full single-page portfolio."""
     settings = SiteSettings.load()
     profile = Profile.objects.first()
-    education = Education.objects.all()
-    experience = Experience.objects.all()
-    projects = Project.objects.prefetch_related('technologies', 'workflow_steps').all()
+    education = Education.objects.order_by('order').all()
+    experience = Experience.objects.order_by('order').all()
+    projects = Project.objects.prefetch_related('technologies', 'workflow_steps').order_by('order').all()
     featured_projects = projects.filter(is_featured=True)
-    skills = Skill.objects.all()
-    certifications = Certification.objects.all()
-    activities = Activity.objects.all()
-    achievements = Achievement.objects.all()
-    social_links = SocialLink.objects.all()
-    job_roles = JobRole.objects.all()
-    role_resumes = RoleResume.objects.all()
+    skills = Skill.objects.order_by('-proficiency', 'order').all()
+    certifications = Certification.objects.order_by('order').all()
+    activities = Activity.objects.order_by('order', '-date').all()
+    achievements = Achievement.objects.order_by('order').all()
+    social_links = SocialLink.objects.order_by('order').all()
+    job_roles = JobRole.objects.order_by('order').all()
+    role_resumes = RoleResume.objects.order_by('order').all()
     contact_form = ContactForm()
 
     # Map role_resumes by role_key
@@ -60,7 +60,7 @@ def home(request):
         'projects_count': projects.count(),
         'internships_count': experience.count(),
         'certifications_count': certifications.count(),
-        'primary_skills': 'Python / ML / SQL',
+        'primary_skills': 'Python / ML / GenAI / SQL',
     }
 
     context = {
