@@ -29,9 +29,13 @@ Render will host your full-stack Django site live at `https://dhanaraj-portfolio
    - **Instance Type**: `Free`
 5. **Environment Variables**:
    - `DEBUG`: `False`
-   - `ALLOWED_HOSTS`: `*`
+   - `ALLOWED_HOSTS`: `dhanaraj-portfolio.onrender.com` (include any custom domain)
    - `SECRET_KEY`: `(click Generate)`
 6. Click **Create Web Service**! Render will deploy your application automatically.
+
+The app uses SQLite by default. For persistent production data, configure a managed
+database and set `DB_ENGINE=mysql`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_HOST`,
+and `DB_PORT` in the service's environment settings. Never commit database credentials.
 
 ---
 
