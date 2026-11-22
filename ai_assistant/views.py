@@ -23,12 +23,13 @@ def ai_chat(request):
     POST /api/ai/chat/
     Body: {"message": "What projects has Dhanaraj built?"}
     """
-    message = request.data.get('message', '').strip()
-    if not message:
+    message = request.data.get('message', '')
+    if not isinstance(message, str) or not message.strip():
         return Response(
             {'success': False, 'error': 'Please provide a message.'},
             status=status.HTTP_400_BAD_REQUEST,
         )
+    message = message.strip()
 
     if len(message) > 1000:
         return Response(
@@ -48,12 +49,13 @@ def ai_resume_analysis(request):
     POST /api/ai/resume-analysis/
     Body: {"job_description": "We are looking for a Python developer..."}
     """
-    job_description = request.data.get('job_description', '').strip()
-    if not job_description:
+    job_description = request.data.get('job_description', '')
+    if not isinstance(job_description, str) or not job_description.strip():
         return Response(
             {'success': False, 'error': 'Please provide a job description.'},
             status=status.HTTP_400_BAD_REQUEST,
         )
+    job_description = job_description.strip()
 
     if len(job_description) > 5000:
         return Response(
