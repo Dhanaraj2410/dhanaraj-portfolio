@@ -89,8 +89,8 @@ elif _db_engine == 'mysql':
         'default': {
             'ENGINE': 'django.db.backends.mysql',
             'NAME':     config('DB_NAME',     default='dhanaraj_portfolio'),
-            'USER':     config('DB_USER',     default='root'),
-            'PASSWORD': config('DB_PASSWORD', default='Dhanaraj2410'),
+            'USER':     config('DB_USER',     default=''),
+            'PASSWORD': config('DB_PASSWORD', default=''),
             'HOST':     config('DB_HOST',     default='127.0.0.1'),
             'PORT':     config('DB_PORT',     default='3306'),
             'OPTIONS': {
