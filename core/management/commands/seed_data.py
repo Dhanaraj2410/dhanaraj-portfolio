@@ -182,7 +182,7 @@ class Command(BaseCommand):
             order=1,
         )
         for i, tech in enumerate(['Python', 'Django', 'DRF', 'PostgreSQL', 'FAISS', 'Sentence Transformers', 'OpenAI API', 'Docker']):
-            ProjectTechnology.objects.create(project=p3, name=tech, order=i)
+            ProjectTechnology.objects.create(project=p1, name=tech, order=i)
         for i, (title, desc) in enumerate([
             ('Document Ingestion', 'Upload and parse multi-page PDF documents'),
             ('Text Extraction & Chunking', 'Recursive character and semantic chunking with overlap'),
@@ -193,7 +193,7 @@ class Command(BaseCommand):
             ('Response & Citations', 'Return structured answer with page references and citations'),
             ('REST API & Docker', 'Expose secure endpoints via DRF and containerize for deployment'),
         ]):
-            ProjectWorkflowStep.objects.create(project=p3, title=title, description=desc, order=i)
+            ProjectWorkflowStep.objects.create(project=p1, title=title, description=desc, order=i)
 
         # Project 2: Intelligent Loan Risk Assessment & Prediction Platform
         p2 = Project.objects.create(
@@ -228,7 +228,7 @@ class Command(BaseCommand):
             order=2,
         )
         for i, tech in enumerate(['Python', 'Pandas', 'Scikit-learn', 'XGBoost', 'TensorFlow/Keras', 'MySQL', 'Django']):
-            ProjectTechnology.objects.create(project=p4, name=tech, order=i)
+            ProjectTechnology.objects.create(project=p2, name=tech, order=i)
         for i, (title, desc) in enumerate([
             ('Applicant Profile', 'Capture applicant financial, demographic, and credit data'),
             ('Data Preprocessing', 'Impute missing values, scale features, and encode categorical inputs'),
@@ -238,7 +238,7 @@ class Command(BaseCommand):
             ('Financial Calculations', 'Compute monthly EMI and repayment amortization schedule'),
             ('Audit Logging', 'Store input records and risk prediction history in MySQL'),
         ]):
-            ProjectWorkflowStep.objects.create(project=p4, title=title, description=desc, order=i)
+            ProjectWorkflowStep.objects.create(project=p2, title=title, description=desc, order=i)
 
         # Project 3: AI-Powered Mock Interview Platform
         p3 = Project.objects.create(
