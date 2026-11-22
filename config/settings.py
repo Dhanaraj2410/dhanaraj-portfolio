@@ -12,7 +12,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # ─── Security ─────────────────────────────────────────────────────────────────
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-dev-key-change-in-production')
 DEBUG = config('DEBUG', default=True, cast=bool)
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = config(
+    'ALLOWED_HOSTS',
+    default='*,localhost,127.0.0.1,.onrender.com,.vercel.app,.railway.app',
+    cast=Csv(),
+)
 
 # ─── Application Definition ──────────────────────────────────────────────────
 INSTALLED_APPS = [
@@ -65,13 +69,43 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 # ─── Database ─────────────────────────────────────────────────────────────────
-DATABASES = {
-    'default': dj_database_url.config(
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
-        conn_max_age=600,
-        conn_health_checks=True,
-    )
-}
+# Priority order:
+# 1. DATABASE_URL (Render PostgreSQL / Cloud Database)
+# 2. DB_ENGINE=mysql (Local / Managed MySQL)
+# 3. SQLite fallback for simple local development
+DATABASE_URL = config('DATABASE_URL', default='')
+_db_engine = config('DB_ENGINE', default='').strip().lower()
+
+if DATABASE_URL:
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=DATABASE_URL,
+            conn_max_age=600,
+            conn_health_checks=True,
+        )
+    }
+elif _db_engine == 'mysql':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME':     config('DB_NAME',     default='dhanaraj_portfolio'),
+            'USER':     config('DB_USER',     default='root'),
+            'PASSWORD': config('DB_PASSWORD', default='Dhanaraj2410'),
+            'HOST':     config('DB_HOST',     default='127.0.0.1'),
+            'PORT':     config('DB_PORT',     default='3306'),
+            'OPTIONS': {
+                'charset': 'utf8mb4',
+                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+            },
+        }
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # ─── Auth ─────────────────────────────────────────────────────────────────────
 AUTH_PASSWORD_VALIDATORS = [
@@ -125,7 +159,6 @@ CORS_ALLOWED_ORIGINS = config(
 OPENAI_API_KEY = config('OPENAI_API_KEY', default='')
 GITHUB_USERNAME = config('GITHUB_USERNAME', default='Dhanaraj2410')
 GITHUB_TOKEN = config('GITHUB_TOKEN', default='')
-
 
 # ─── AI Rate Limiting ────────────────────────────────────────────────────────
 AI_RATE_LIMIT_PER_MINUTE = 10
