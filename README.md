@@ -58,7 +58,7 @@ A production-grade, interactive full-stack portfolio platform for **Dhanaraj Arj
 
 ## 🛠️ Architecture & Features
 
-- **Multi-Database Support**: Seamless automatic switching between **MySQL** (via PyMySQL), **PostgreSQL** (via dj-database-url), and **SQLite** (for quick local development).
+- **Database Support**: **MySQL** (via mysqlclient) by default, managed databases via `DATABASE_URL`, and **SQLite** only when explicitly selected with `DB_ENGINE=sqlite`.
 - **Dynamic Content Administration**: Every project, skill, internship, certification, and timeline entry is fully manageable via the Django Admin panel at `/admin/`.
 - **RESTful API**: Clean REST API endpoints exposed via Django REST Framework at `/api/` with throttling and CORS headers.
 - **Interactive Recruiter Tools**: Live skill match analysis, role-tailored resume generation, and interactive terminal interface.
@@ -103,16 +103,19 @@ Set these values in `.env` as needed:
   `EMAIL_USE_TLS`, and `DEFAULT_FROM_EMAIL` (optional, for contact email)
 - `CONTACT_EMAIL` (optional notification recipient)
 
-To run with **MySQL**:
+The default local database configuration uses **MySQL**:
 ```env
 DB_ENGINE=mysql
-DB_NAME=dhanaraj_portfolio
+DB_NAME=portfolio_db
 DB_USER=root
-DB_PASSWORD=your_mysql_password
+DB_PASSWORD=your_local_mysql_password
 DB_HOST=localhost
 DB_PORT=3306
+DB_SSL=False
 ```
-To run with **SQLite** (zero configuration):
+Keep credentials in your ignored `.env` file, not in source control. For a managed
+MySQL provider that requires TLS, set `DB_SSL=True`; if the provider supplies a CA
+certificate, set `DB_SSL_CA` to its path. To explicitly use **SQLite**:
 ```env
 DB_ENGINE=sqlite
 ```
@@ -128,6 +131,25 @@ python manage.py seed_data
 python manage.py runserver
 ```
 Visit `http://localhost:8000` to explore the live portfolio!
+
+### Moving existing SQLite data to MySQL
+
+Before switching databases, back up `db.sqlite3`. With SQLite selected, export the
+existing Django data; then switch to MySQL, apply schema migrations, and load the
+fixture:
+
+```powershell
+$env:DB_ENGINE = "sqlite"
+python manage.py dumpdata --natural-foreign --natural-primary --exclude contenttypes --exclude auth.permission --indent 2 > sqlite-data.json
+
+$env:DB_ENGINE = "mysql"
+python manage.py migrate
+python manage.py loaddata sqlite-data.json
+```
+
+Set `DB_PASSWORD` in the ignored `.env` before running the MySQL commands. Keep
+the backup and fixture until the imported data has been verified; neither
+`migrate` nor `loaddata` deletes the SQLite database.
 
 ---
 
