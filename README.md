@@ -95,61 +95,20 @@ cp .env.example .env
 
 Set these values in `.env` as needed:
 - `SECRET_KEY` (use a strong value in production)
-- `GITHUB_USERNAME` (your GitHub username)
-- `OPENAI_API_KEY` (optional, for AI chatbot/analyzer)
-- `GITHUB_TOKEN` (optional, for higher API rate limits)
-- `ALLOWED_HOSTS` (comma-separated hostnames; defaults to localhost)
-- `EMAIL_HOST`, `EMAIL_PORT`, `EMAIL_HOST_USER`, `EMAIL_HOST_PASSWORD`,
-  `EMAIL_USE_TLS`, and `DEFAULT_FROM_EMAIL` (optional, for contact email)
-- `CONTACT_EMAIL` (optional notification recipient)
+- `ALLOWED_HOSTS` (comma-separated hostnames; defaults to localhost + `.vercel.app`)
+- `CSRF_TRUSTED_ORIGINS` (comma-separated HTTPS origins)
+- `GITHUB_USERNAME`, `OPENAI_API_KEY`, `GITHUB_TOKEN` (optional, currently unused)
 
-The default local database configuration uses **MySQL**:
-```env
-DB_ENGINE=mysql
-DB_NAME=portfolio_db
-DB_USER=root
-DB_PASSWORD=your_local_mysql_password
-DB_HOST=localhost
-DB_PORT=3306
-DB_SSL=False
-```
-Keep credentials in your ignored `.env` file, not in source control. For a managed
-MySQL provider that requires TLS, set `DB_SSL=True`; if the provider supplies a CA
-certificate, set `DB_SSL_CA` to its path. To explicitly use **SQLite**:
-```env
-DB_ENGINE=sqlite
-```
+This portfolio is **fully static** — it does **not** use any database
+(no MySQL, PostgreSQL, or SQLite). All content (profile, projects, skills,
+education, experience, certifications, activities, social links, resumes) lives
+in `core/content.py`, and images/resumes are served from `static/media/`.
 
-### 5. Initialize Database & Seed Resume Data
-```bash
-python manage.py migrate
-python manage.py seed_data
-```
-
-### 6. Run Development Server
+### 5. Run Development Server
 ```bash
 python manage.py runserver
 ```
 Visit `http://localhost:8000` to explore the live portfolio!
-
-### Moving existing SQLite data to MySQL
-
-Before switching databases, back up `db.sqlite3`. With SQLite selected, export the
-existing Django data; then switch to MySQL, apply schema migrations, and load the
-fixture:
-
-```powershell
-$env:DB_ENGINE = "sqlite"
-python manage.py dumpdata --natural-foreign --natural-primary --exclude contenttypes --exclude auth.permission --indent 2 > sqlite-data.json
-
-$env:DB_ENGINE = "mysql"
-python manage.py migrate
-python manage.py loaddata sqlite-data.json
-```
-
-Set `DB_PASSWORD` in the ignored `.env` before running the MySQL commands. Keep
-the backup and fixture until the imported data has been verified; neither
-`migrate` nor `loaddata` deletes the SQLite database.
 
 ---
 
