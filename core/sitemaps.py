@@ -1,9 +1,10 @@
 """
-Django sitemaps for SEO.
+Django sitemaps for SEO (static, no database).
 """
 from django.contrib.sitemaps import Sitemap
 from django.urls import reverse
-from .models import Project
+
+from . import content
 
 
 class StaticViewSitemap(Sitemap):
@@ -22,10 +23,7 @@ class ProjectSitemap(Sitemap):
     changefreq = 'monthly'
 
     def items(self):
-        return Project.objects.all()
+        return content.PROJECTS
 
     def location(self, obj):
         return reverse('core:project_detail', kwargs={'slug': obj.slug})
-
-    def lastmod(self, obj):
-        return obj.created_at

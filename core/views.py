@@ -1,86 +1,53 @@
 """
-Template views for the portfolio website.
+Template views for the portfolio website (static, no database).
+All content is served from core/content.py.
 """
-import logging
-from smtplib import SMTPException
-
-from django.conf import settings
-from django.core.mail import send_mail
-from django.shortcuts import render, get_object_or_404
-from django.http import JsonResponse
+from django.http import Http404, JsonResponse
+from django.shortcuts import render
 from django.views.decorators.http import require_POST
-from django.middleware.csrf import get_token
-from .models import (
-    SiteSettings, Profile, Education, Experience, Project,
-    Skill, Certification, Activity, Achievement, SocialLink, JobRole, RoleResume,
-)
-from .forms import ContactForm
+
+from . import content
+
+
+def _group(items, attr):
+    groups = {}
+    for item in items:
+        key = getattr(item, attr)
+        groups.setdefault(key, []).append(item)
+    return groups
 
 
 def home(request):
     """Render the full single-page portfolio."""
-    settings = SiteSettings.load()
-    profile = Profile.objects.first()
-    education = Education.objects.order_by('order').all()
-    experience = Experience.objects.order_by('order').all()
-    projects = Project.objects.prefetch_related('technologies', 'workflow_steps').order_by('order').all()
-    featured_projects = projects.filter(is_featured=True)
-    skills = Skill.objects.order_by('-proficiency', 'order').all()
-    certifications = Certification.objects.order_by('order').all()
-    activities = Activity.objects.order_by('order', '-date').all()
-    achievements = Achievement.objects.order_by('order').all()
-    social_links = SocialLink.objects.order_by('order').all()
-    job_roles = JobRole.objects.order_by('order').all()
-    role_resumes = RoleResume.objects.order_by('order').all()
-    contact_form = ContactForm()
+    projects = content.PROJECTS
+    featured = [p for p in projects if p.is_featured]
 
-    # Map role_resumes by role_key
-    role_resumes_map = {rr.role_key: rr for rr in role_resumes}
-
-    # Group skills by category
-    skill_categories = {}
-    for skill in skills:
-        cat_display = skill.get_category_display()
-        if cat_display not in skill_categories:
-            skill_categories[cat_display] = []
-        skill_categories[cat_display].append(skill)
-
-    # Group activities by category
-    activity_categories = {}
-    for activity in activities:
-        cat_display = activity.get_category_display()
-        if cat_display not in activity_categories:
-            activity_categories[cat_display] = []
-        activity_categories[cat_display].append(activity)
-
-    # Stats for animated counters
     stats = {
         'graduation_year': '2026',
         'cgpa': '8.54',
-        'projects_count': projects.count(),
-        'internships_count': experience.count(),
-        'certifications_count': certifications.count(),
+        'projects_count': len(projects),
+        'internships_count': len(content.EXPERIENCE),
+        'certifications_count': len(content.CERTIFICATIONS),
         'primary_skills': 'Python / ML / GenAI / SQL',
     }
 
     context = {
-        'settings': settings,
-        'profile': profile,
-        'education': education,
-        'experience': experience,
+        'settings': content.SITE,
+        'profile': content.PROFILE,
+        'education': content.EDUCATION,
+        'experience': content.EXPERIENCE,
         'projects': projects,
-        'featured_projects': featured_projects if featured_projects.exists() else projects[:3],
-        'skills': skills,
-        'skill_categories': skill_categories,
-        'certifications': certifications,
-        'activities': activities,
-        'activity_categories': activity_categories,
-        'achievements': achievements,
-        'social_links': social_links,
-        'job_roles': job_roles,
-        'role_resumes': role_resumes,
-        'role_resumes_map': role_resumes_map,
-        'contact_form': contact_form,
+        'featured_projects': featured if featured else projects[:3],
+        'skills': content.SKILLS,
+        'skill_categories': _group(content.SKILLS, 'category_display'),
+        'certifications': content.CERTIFICATIONS,
+        'activities': content.ACTIVITIES,
+        'activity_categories': _group(content.ACTIVITIES, 'category_display'),
+        'achievements': content.ACHIEVEMENTS,
+        'social_links': content.SOCIAL_LINKS,
+        'job_roles': content.JOB_ROLES,
+        'role_resumes': content.ROLE_RESUMES,
+        'role_resumes_map': {rr.role_key: rr for rr in content.ROLE_RESUMES},
         'stats': stats,
     }
     return render(request, 'home.html', context)
@@ -88,57 +55,29 @@ def home(request):
 
 def project_detail(request, slug):
     """Render a detailed project page."""
-    project = get_object_or_404(
-        Project.objects.prefetch_related('technologies', 'workflow_steps'),
-        slug=slug,
-    )
-    settings = SiteSettings.load()
-    profile = Profile.objects.first()
-    social_links = SocialLink.objects.all()
+    project = next((p for p in content.PROJECTS if p.slug == slug), None)
+    if project is None:
+        raise Http404('Project not found')
 
     context = {
         'project': project,
-        'settings': settings,
-        'profile': profile,
-        'social_links': social_links,
+        'settings': content.SITE,
+        'profile': content.PROFILE,
+        'social_links': content.SOCIAL_LINKS,
     }
     return render(request, 'project_detail.html', context)
 
 
-logger = logging.getLogger(__name__)
-
-
 @require_POST
 def contact_submit(request):
-    """Handle contact form submission via AJAX."""
-    form = ContactForm(request.POST)
-    if form.is_valid():
-        msg_obj = form.save()
+    """Contact submissions are not stored (no database).
 
-        if settings.EMAIL_HOST and settings.CONTACT_EMAIL:
-            try:
-                send_mail(
-                    subject=f"New Portfolio Contact Message from {msg_obj.name}",
-                    message=f"Name: {msg_obj.name}\nEmail: {msg_obj.email}\nCompany: {msg_obj.company}\nRole: {msg_obj.job_role}\n\nMessage:\n{msg_obj.message}",
-                    from_email=settings.DEFAULT_FROM_EMAIL,
-                    recipient_list=[settings.CONTACT_EMAIL],
-                    fail_silently=False,
-                )
-            except (OSError, SMTPException) as exc:
-                logger.warning("Could not send contact notification email: %s", exc)
-
-        return JsonResponse({
-            'success': True,
-            'message': 'Thank you for your message! I will get back to you soon.',
-        })
-    else:
-        errors = {}
-        for field, error_list in form.errors.items():
-            errors[field] = [str(e) for e in error_list]
-        return JsonResponse({
-            'success': False,
-            'errors': errors,
-        }, status=400)
+    The contact section links directly to the owner's email and social profiles.
+    """
+    return JsonResponse({
+        'success': True,
+        'message': 'Thanks! Please email lokhandedhanraj2410@gmail.com directly.',
+    })
 
 
 def robots_txt(request):

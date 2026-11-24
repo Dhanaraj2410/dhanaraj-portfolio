@@ -1,21 +1,12 @@
 """
-REST API views for the portfolio platform.
+REST API views for the portfolio platform (static, no database).
+Content is served from core/content.py.
 """
-from rest_framework import generics, status
+from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import (
-    Profile, Education, Experience, Project,
-    Skill, Certification, Activity, Achievement,
-    SocialLink, JobRole, SiteSettings,
-)
-from .serializers import (
-    ProfileSerializer, EducationSerializer, ExperienceSerializer,
-    ProjectListSerializer, ProjectDetailSerializer, SkillSerializer,
-    CertificationSerializer, ActivitySerializer, AchievementSerializer,
-    SocialLinkSerializer, ContactMessageSerializer, JobRoleSerializer,
-    SiteSettingsSerializer,
-)
+
+from . import content
 
 
 @api_view(['GET'])
@@ -33,93 +24,155 @@ def api_overview(request):
         'social_links': '/api/social-links/',
         'job_roles': '/api/job-roles/',
         'contact': '/api/contact/',
-        'ai_chat': '/api/ai/chat/',
-        'ai_resume_analysis': '/api/ai/resume-analysis/',
-        'github': '/api/github/',
     })
 
 
 @api_view(['GET'])
 def profile_api(request):
-    """Get the main profile."""
-    profile = Profile.objects.first()
-    if not profile:
-        return Response({'detail': 'Profile not configured.'}, status=404)
-    serializer = ProfileSerializer(profile, context={'request': request})
-    return Response(serializer.data)
+    p = content.PROFILE
+    return Response({
+        'full_name': p.full_name,
+        'title': p.title,
+        'bio': p.bio,
+        'location': p.location,
+        'email': p.email,
+        'phone': p.phone,
+        'photo_url': p.photo.url or None,
+        'resume_url': p.resume_pdf.url or None,
+        'professional_summary': p.professional_summary,
+    })
 
 
-class EducationListAPI(generics.ListAPIView):
-    queryset = Education.objects.all()
-    serializer_class = EducationSerializer
-    pagination_class = None
+@api_view(['GET'])
+def education_api(request):
+    return Response([
+        {
+            'degree': e.degree, 'level': e.level, 'institution': e.institution,
+            'university': e.university, 'start_year': e.start_year,
+            'end_year': e.end_year, 'cgpa': e.cgpa, 'percentage': e.percentage,
+            'description': e.description, 'score_display': e.score_display,
+        }
+        for e in content.EDUCATION
+    ])
 
 
-class ExperienceListAPI(generics.ListAPIView):
-    queryset = Experience.objects.all()
-    serializer_class = ExperienceSerializer
-    pagination_class = None
+@api_view(['GET'])
+def experience_api(request):
+    return Response([
+        {
+            'title': e.title, 'company': e.company, 'location': e.location,
+            'start_date': e.start_date, 'end_date': e.end_date,
+            'is_current': e.is_current, 'description': e.description,
+            'responsibilities_list': e.responsibilities_list,
+            'duration_display': e.duration_display,
+        }
+        for e in content.EXPERIENCE
+    ])
 
 
-class ProjectListAPI(generics.ListAPIView):
-    queryset = Project.objects.prefetch_related('technologies').all()
-    serializer_class = ProjectListSerializer
-    pagination_class = None
+def _project_card(p):
+    return {
+        'title': p.title, 'slug': p.slug, 'short_description': p.short_description,
+        'algorithm': p.algorithm, 'github_url': p.github_url,
+        'live_demo_url': p.live_demo_url, 'is_featured': p.is_featured,
+        'order': p.order, 'features_list': p.features_list,
+        'technologies': [{'name': t.name} for t in p.technologies.all()],
+    }
 
 
-class ProjectDetailAPI(generics.RetrieveAPIView):
-    queryset = Project.objects.prefetch_related('technologies', 'workflow_steps').all()
-    serializer_class = ProjectDetailSerializer
-    lookup_field = 'slug'
+@api_view(['GET'])
+def projects_api(request):
+    return Response([_project_card(p) for p in content.PROJECTS])
 
 
-class SkillListAPI(generics.ListAPIView):
-    queryset = Skill.objects.all()
-    serializer_class = SkillSerializer
-    pagination_class = None
+@api_view(['GET'])
+def project_detail_api(request, slug):
+    project = next((p for p in content.PROJECTS if p.slug == slug), None)
+    if project is None:
+        return Response({'detail': 'Not found.'}, status=status.HTTP_404_NOT_FOUND)
+    data = _project_card(project)
+    data.update({
+        'description': project.description,
+        'problem_statement': project.problem_statement,
+        'solution': project.solution,
+        'architecture': project.architecture,
+        'features': project.features,
+        'dataset_info': project.dataset_info,
+        'results': project.results,
+        'challenges': project.challenges,
+        'future_improvements': project.future_improvements,
+        'workflow_steps': [
+            {'title': s.title, 'description': s.description, 'icon': s.icon, 'order': s.order}
+            for s in project.workflow_steps.all()
+        ],
+    })
+    return Response(data)
 
 
-class CertificationListAPI(generics.ListAPIView):
-    queryset = Certification.objects.all()
-    serializer_class = CertificationSerializer
-    pagination_class = None
+@api_view(['GET'])
+def skills_api(request):
+    return Response([
+        {
+            'name': s.name, 'category': s.category,
+            'category_display': s.category_display,
+            'proficiency': s.proficiency, 'icon': s.icon,
+        }
+        for s in content.SKILLS
+    ])
 
 
-class ActivityListAPI(generics.ListAPIView):
-    queryset = Activity.objects.all()
-    serializer_class = ActivitySerializer
-    pagination_class = None
+@api_view(['GET'])
+def certifications_api(request):
+    return Response([
+        {
+            'title': c.title, 'organization': c.organization,
+            'description': c.description, 'skills_list': c.skills_list,
+            'verification_url': c.verification_url, 'date_earned': c.date_earned,
+        }
+        for c in content.CERTIFICATIONS
+    ])
 
 
-class AchievementListAPI(generics.ListAPIView):
-    queryset = Achievement.objects.all()
-    serializer_class = AchievementSerializer
-    pagination_class = None
+@api_view(['GET'])
+def activities_api(request):
+    return Response([
+        {
+            'title': a.title, 'category': a.category,
+            'category_display': a.category_display,
+            'description': a.description, 'date': a.date, 'icon': a.icon,
+        }
+        for a in content.ACTIVITIES
+    ])
 
 
-class SocialLinkListAPI(generics.ListAPIView):
-    queryset = SocialLink.objects.all()
-    serializer_class = SocialLinkSerializer
-    pagination_class = None
+@api_view(['GET'])
+def achievements_api(request):
+    return Response([
+        {'title': a.title, 'description': a.description, 'date': a.date, 'icon': a.icon}
+        for a in content.ACHIEVEMENTS
+    ])
 
 
-class JobRoleListAPI(generics.ListAPIView):
-    queryset = JobRole.objects.all()
-    serializer_class = JobRoleSerializer
-    pagination_class = None
+@api_view(['GET'])
+def social_links_api(request):
+    return Response([
+        {
+            'platform': s.platform, 'platform_display': s.platform_display,
+            'url': s.url, 'display_name': s.display_name, 'icon_class': s.icon_class,
+        }
+        for s in content.SOCIAL_LINKS
+    ])
+
+
+@api_view(['GET'])
+def job_roles_api(request):
+    return Response([{'title': j.title} for j in content.JOB_ROLES])
 
 
 @api_view(['POST'])
 def contact_api(request):
-    """Handle contact form submission via API."""
-    serializer = ContactMessageSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(
-            {'success': True, 'message': 'Thank you for your message!'},
-            status=status.HTTP_201_CREATED,
-        )
+    """Contact submissions are not stored (no database)."""
     return Response(
-        {'success': False, 'errors': serializer.errors},
-        status=status.HTTP_400_BAD_REQUEST,
+        {'success': True, 'message': 'Please email lokhandedhanraj2410@gmail.com directly.'},
+        status=status.HTTP_200_OK,
     )
