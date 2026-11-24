@@ -5,6 +5,7 @@ import os
 from pathlib import Path
 from decouple import config, Csv
 import dj_database_url
+from django.core.exceptions import ImproperlyConfigured
 
 # ─── Paths ────────────────────────────────────────────────────────────────────
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -78,12 +79,10 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 # ─── Database ─────────────────────────────────────────────────────────────────
-# Priority order:
-# 1. DATABASE_URL (Render PostgreSQL / Cloud Database)
-# 2. DB_ENGINE=mysql (Local / Managed MySQL)
-# 3. SQLite fallback for simple local development
+# DATABASE_URL is for managed databases. Otherwise, MySQL is the default;
+# SQLite remains available by explicitly setting DB_ENGINE=sqlite.
 DATABASE_URL = config('DATABASE_URL', default='')
-_db_engine = config('DB_ENGINE', default='').strip().lower()
+_db_engine = config('DB_ENGINE', default='mysql').strip().lower()
 
 if DATABASE_URL:
     DATABASES = {
@@ -94,27 +93,38 @@ if DATABASE_URL:
         )
     }
 elif _db_engine == 'mysql':
+    _mysql_options = {
+        'charset': 'utf8mb4',
+        'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+    }
+    if config('DB_SSL', default=False, cast=bool):
+        _mysql_options['ssl'] = {}
+        _ssl_ca = config('DB_SSL_CA', default='')
+        if _ssl_ca:
+            _mysql_options['ssl']['ca'] = _ssl_ca
+
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME':     config('DB_NAME',     default='dhanaraj_portfolio'),
-            'USER':     config('DB_USER',     default=''),
+            'NAME':     config('DB_NAME',     default='portfolio_db'),
+            'USER':     config('DB_USER',     default='root'),
             'PASSWORD': config('DB_PASSWORD', default=''),
-            'HOST':     config('DB_HOST',     default='127.0.0.1'),
+            'HOST':     config('DB_HOST',     default='localhost'),
             'PORT':     config('DB_PORT',     default='3306'),
-            'OPTIONS': {
-                'charset': 'utf8mb4',
-                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-            },
+            'OPTIONS': _mysql_options,
         }
     }
-else:
+elif _db_engine == 'sqlite':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+else:
+    raise ImproperlyConfigured(
+        "DB_ENGINE must be 'mysql' or 'sqlite' when DATABASE_URL is not set."
+    )
 
 # ─── Auth ─────────────────────────────────────────────────────────────────────
 AUTH_PASSWORD_VALIDATORS = [
