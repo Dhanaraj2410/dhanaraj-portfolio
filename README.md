@@ -58,7 +58,7 @@ A production-grade, interactive full-stack portfolio platform for **Dhanaraj Arj
 
 ## 🛠️ Architecture & Features
 
-- **Database Support**: **MySQL** (via mysqlclient) by default, managed databases via `DATABASE_URL`, and **SQLite** only when explicitly selected with `DB_ENGINE=sqlite`.
+- **Database Support**: **MySQL** (via the pure-Python **PyMySQL** driver, no C build required) by default, managed databases via `DATABASE_URL`, and **SQLite** only when explicitly selected with `DB_ENGINE=sqlite`.
 - **Dynamic Content Administration**: Every project, skill, internship, certification, and timeline entry is fully manageable via the Django Admin panel at `/admin/`.
 - **RESTful API**: Clean REST API endpoints exposed via Django REST Framework at `/api/` with throttling and CORS headers.
 - **Interactive Recruiter Tools**: Live skill match analysis, role-tailored resume generation, and interactive terminal interface.
