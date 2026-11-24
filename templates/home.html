@@ -691,23 +691,22 @@
       </div>
 
       <div>
-        <form id="contact-form" method="post" action="{% url 'core:contact_submit' %}">
-          {% csrf_token %}
-          {{ contact_form.website }}
-          <div class="form-row">
-            {{ contact_form.name }}
-            {{ contact_form.email }}
-          </div>
-          <div class="form-row">
-            {{ contact_form.company }}
-            {{ contact_form.job_role }}
-          </div>
-          {{ contact_form.message }}
-          <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; justify-content: center;">
-            📤 Send Message
-          </button>
-        </form>
-        <div class="form-success" id="form-success"></div>
+        <p style="color: var(--text-secondary); margin-bottom: var(--space-lg);">
+          The fastest way to reach me is email. Click below to open your mail app with a prefilled message.
+        </p>
+        <a href="mailto:{{ profile.email|default:'lokhandedhanraj2410@gmail.com' }}?subject=Opportunity%20for%20Dhanaraj" class="btn btn-primary btn-lg" style="width: 100%; justify-content: center;">
+          📧 Email Me
+        </a>
+        <div style="display: flex; gap: var(--space-sm); margin-top: var(--space-md); justify-content: center; flex-wrap: wrap;">
+          {% for link in social_links %}
+            {% if link.url %}
+              <a href="{% if link.platform == 'email' %}mailto:{{ link.url }}{% else %}{{ link.url }}{% endif %}"
+                 class="btn btn-outline btn-sm" target="{% if link.platform != 'email' %}_blank{% endif %}" rel="noopener">
+                {{ link.get_platform_display }}
+              </a>
+            {% endif %}
+          {% endfor %}
+        </div>
       </div>
     </div>
   </div>

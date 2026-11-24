@@ -86,31 +86,6 @@
     {% block content %}{% endblock %}
   </main>
 
-  <!-- Chatbot Widget -->
-  {% csrf_token %}
-  <button class="chatbot-toggle" id="chatbot-toggle" aria-label="Open AI Assistant">🤖</button>
-  <div class="chatbot-window" id="chatbot-window">
-    <div class="chatbot-header">
-      <h3>🤖 Ask Dhanaraj AI</h3>
-      <button class="chatbot-close" id="chatbot-close" aria-label="Close chat">✕</button>
-    </div>
-    <div class="chatbot-messages" id="chatbot-messages"></div>
-    <div class="chatbot-suggestions">
-      <button class="chat-suggestion">What skills does Dhanaraj have?</button>
-      <button class="chat-suggestion">What Machine Learning projects has he built?</button>
-      <button class="chat-suggestion">What Python projects has he completed?</button>
-      <button class="chat-suggestion">What internships does he have?</button>
-      <button class="chat-suggestion">What certifications does he have?</button>
-      <button class="chat-suggestion">Is he available for work?</button>
-      <button class="chat-suggestion">What roles is he looking for?</button>
-      <button class="chat-suggestion">Why should we hire him?</button>
-    </div>
-    <div class="chatbot-input">
-      <input type="text" id="chatbot-input" placeholder="Ask me anything..." aria-label="Chat message">
-      <button id="chatbot-send" aria-label="Send message">➤</button>
-    </div>
-  </div>
-
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
@@ -133,7 +108,6 @@
 
   <!-- Scripts -->
   <script src="{% static 'js/main.js' %}"></script>
-  <script src="{% static 'js/chatbot.js' %}"></script>
   <script src="{% static 'js/resume-hub.js' %}"></script>
   <script src="{% static 'js/workflow.js' %}"></script>
   {% block extra_js %}{% endblock %}
