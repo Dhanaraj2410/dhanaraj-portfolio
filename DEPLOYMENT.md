@@ -40,6 +40,18 @@ The app uses SQLite by default. For persistent production data, configure a mana
 database and set `DB_ENGINE=mysql`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_HOST`,
 and `DB_PORT` in the service's environment settings. Never commit database credentials.
 
+## 🌐 Deploy on Vercel
+
+The Django settings allow `dhanaraj-portfolio-mocha.vercel.app` and trust its HTTPS
+origin for CSRF checks. If you configure `ALLOWED_HOSTS` or
+`CSRF_TRUSTED_ORIGINS` in Vercel's project environment variables, include the
+Vercel hostname and origin respectively:
+
+- `ALLOWED_HOSTS`: `dhanaraj-portfolio-mocha.vercel.app`
+- `CSRF_TRUSTED_ORIGINS`: `https://dhanaraj-portfolio-mocha.vercel.app`
+
+For additional custom domains, add each domain to both settings as appropriate.
+
 ---
 
 ## 🔑 Admin Setup After Deployment:

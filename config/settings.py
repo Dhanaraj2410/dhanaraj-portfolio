@@ -17,6 +17,15 @@ ALLOWED_HOSTS = config(
     default='localhost,127.0.0.1',
     cast=Csv(),
 )
+VERCEL_HOST = 'dhanaraj-portfolio-mocha.vercel.app'
+if VERCEL_HOST not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append(VERCEL_HOST)
+
+CSRF_TRUSTED_ORIGINS = config(
+    'CSRF_TRUSTED_ORIGINS',
+    default='https://dhanaraj-portfolio-mocha.vercel.app',
+    cast=Csv(),
+)
 
 # ─── Application Definition ──────────────────────────────────────────────────
 INSTALLED_APPS = [
