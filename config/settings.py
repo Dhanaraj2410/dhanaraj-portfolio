@@ -15,16 +15,13 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-dev-key-change-in-pro
 DEBUG = config('DEBUG', default=True, cast=bool)
 ALLOWED_HOSTS = config(
     'ALLOWED_HOSTS',
-    default='localhost,127.0.0.1',
+    default='localhost,127.0.0.1,.vercel.app',
     cast=Csv(),
 )
-VERCEL_HOST = 'dhanaraj-portfolio-mocha.vercel.app'
-if VERCEL_HOST not in ALLOWED_HOSTS:
-    ALLOWED_HOSTS.append(VERCEL_HOST)
 
 CSRF_TRUSTED_ORIGINS = config(
     'CSRF_TRUSTED_ORIGINS',
-    default='https://dhanaraj-portfolio-mocha.vercel.app',
+    default='https://dhanaraj-portfolio-sable.vercel.app,https://dhanaraj-portfolio-mocha.vercel.app',
     cast=Csv(),
 )
 
