@@ -1,6 +1,6 @@
 import re
 
-import MySQLdb
+import pymysql
 from decouple import config
 
 
@@ -16,11 +16,11 @@ def main():
         if ssl_ca:
             ssl_options['ssl']['ca'] = ssl_ca
 
-    connection = MySQLdb.connect(
+    connection = pymysql.connect(
         host=config('DB_HOST', default='localhost'),
         port=config('DB_PORT', default=3306, cast=int),
         user=config('DB_USER', default='root'),
-        passwd=config('DB_PASSWORD', default=''),
+        password=config('DB_PASSWORD', default=''),
         charset='utf8mb4',
         autocommit=True,
         **ssl_options,
