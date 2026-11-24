@@ -36,11 +36,37 @@ Render will host your full-stack Django site live at `https://dhanaraj-portfolio
      notifications should go to a different address.
 6. Click **Create Web Service**! Render will deploy your application automatically.
 
-The app uses SQLite by default. For persistent production data, configure a managed
+The app uses MySQL by default. For persistent production data, configure a managed
 database and set `DB_ENGINE=mysql`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_HOST`,
-and `DB_PORT` in the service's environment settings. Never commit database credentials.
+and `DB_PORT` in the service's environment settings. Enable `DB_SSL=True` when
+required by the provider; set `DB_SSL_CA` to its CA certificate path when supplied.
+Alternatively, set `DATABASE_URL` to a provider-supported database URL. Never commit
+database credentials.
 
 ## 🌐 Deploy on Vercel
+
+Vercel's function filesystem is not a persistent database. Use a remotely hosted
+MySQL service; do not set its host to `localhost`. In Vercel Project Settings →
+Environment Variables, add the production `DB_ENGINE=mysql`, `DB_NAME`, `DB_USER`,
+`DB_PASSWORD`, `DB_HOST`, and `DB_PORT`. Set `DB_SSL=True` and, if required by the
+provider, provide `DB_SSL_CA` using the provider's recommended certificate setup.
+Keep these values in Vercel's environment settings, not in the repository or
+`vercel.json`. A MySQL `DATABASE_URL` can be used instead when supported by the
+provider.
+
+Set the Vercel project's Root Directory to `portfolio` so it uses
+`portfolio/vercel.json` and `portfolio/requirements.txt`. Run `python manage.py
+migrate` against the remote database from a trusted environment after its
+environment variables are configured and before serving the new version. Do not
+run schema migrations from every serverless function invocation. Create an admin
+user through a trusted environment with the same production database settings:
+
+```bash
+python manage.py createsuperuser
+```
+
+For ongoing schema changes, generate and review migrations locally, then apply
+them to the production database before deploying code that depends on them.
 
 The Django settings allow `dhanaraj-portfolio-mocha.vercel.app` and trust its HTTPS
 origin for CSRF checks. If you configure `ALLOWED_HOSTS` or
