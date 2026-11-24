@@ -1,11 +1,11 @@
 """
 Django settings for Dhanaraj AI/ML Portfolio platform.
+
+Static portfolio: no database is used. All content lives in core/content.py.
 """
 import os
 from pathlib import Path
 from decouple import config, Csv
-import dj_database_url
-from django.core.exceptions import ImproperlyConfigured
 
 # ─── Paths ────────────────────────────────────────────────────────────────────
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,12 +26,8 @@ CSRF_TRUSTED_ORIGINS = config(
 )
 
 # ─── Application Definition ──────────────────────────────────────────────────
+# No database-backed apps (admin/auth/contenttypes/sessions/messages removed).
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
     # Third-party
@@ -39,19 +35,14 @@ INSTALLED_APPS = [
     'corsheaders',
     # Local apps
     'core.apps.CoreConfig',
-    'ai_assistant.apps.AiAssistantConfig',
-    'github_integration.apps.GithubIntegrationConfig',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
@@ -66,70 +57,13 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.csrf',
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
-
-# ─── Database ─────────────────────────────────────────────────────────────────
-# DATABASE_URL is for managed databases. Otherwise, MySQL is the default;
-# SQLite remains available by explicitly setting DB_ENGINE=sqlite.
-DATABASE_URL = config('DATABASE_URL', default='')
-_db_engine = config('DB_ENGINE', default='mysql').strip().lower()
-
-if DATABASE_URL:
-    DATABASES = {
-        'default': dj_database_url.config(
-            default=DATABASE_URL,
-            conn_max_age=600,
-            conn_health_checks=True,
-        )
-    }
-elif _db_engine == 'mysql':
-    _mysql_options = {
-        'charset': 'utf8mb4',
-        'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-    }
-    if config('DB_SSL', default=False, cast=bool):
-        _mysql_options['ssl'] = {}
-        _ssl_ca = config('DB_SSL_CA', default='')
-        if _ssl_ca:
-            _mysql_options['ssl']['ca'] = _ssl_ca
-
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME':     config('DB_NAME',     default='portfolio_db'),
-            'USER':     config('DB_USER',     default='root'),
-            'PASSWORD': config('DB_PASSWORD', default=''),
-            'HOST':     config('DB_HOST',     default='localhost'),
-            'PORT':     config('DB_PORT',     default='3306'),
-            'OPTIONS': _mysql_options,
-        }
-    }
-elif _db_engine == 'sqlite':
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
-else:
-    raise ImproperlyConfigured(
-        "DB_ENGINE must be 'mysql' or 'sqlite' when DATABASE_URL is not set."
-    )
-
-# ─── Auth ─────────────────────────────────────────────────────────────────────
-AUTH_PASSWORD_VALIDATORS = [
-    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
-]
 
 # ─── Internationalization ─────────────────────────────────────────────────────
 LANGUAGE_CODE = 'en-us'
@@ -141,7 +75,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -154,6 +88,8 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
     ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [],
+    'UNAUTHENTICATED_USER': None,
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 20,
     'DEFAULT_THROTTLE_CLASSES': [
@@ -171,28 +107,10 @@ CORS_ALLOWED_ORIGINS = config(
     cast=Csv(),
 )
 
-# ─── External API Keys ───────────────────────────────────────────────────────
+# ─── External API Keys (optional, unused by the static site) ──────────────────
 OPENAI_API_KEY = config('OPENAI_API_KEY', default='')
 GITHUB_USERNAME = config('GITHUB_USERNAME', default='Dhanaraj2410')
 GITHUB_TOKEN = config('GITHUB_TOKEN', default='')
-
-# Email notifications for contact form submissions
-EMAIL_HOST = config('EMAIL_HOST', default='')
-EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
-EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
-EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
-CONTACT_EMAIL = config(
-    'CONTACT_EMAIL',
-    default=EMAIL_HOST_USER or 'lokhandedhanraj2410@gmail.com',
-)
-DEFAULT_FROM_EMAIL = config(
-    'DEFAULT_FROM_EMAIL',
-    default=EMAIL_HOST_USER or CONTACT_EMAIL,
-)
-
-# ─── AI Rate Limiting ────────────────────────────────────────────────────────
-AI_RATE_LIMIT_PER_MINUTE = 10
 
 # ─── Security Settings (Production) ──────────────────────────────────────────
 if not DEBUG:
