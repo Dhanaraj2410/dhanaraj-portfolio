@@ -83,3 +83,9 @@ class PortfolioSmokeTests(TestCase):
         current = [item for item in content.EXPERIENCE if item.is_current]
         self.assertEqual(len(current), 1)
         self.assertEqual(current[0].company, 'Plainsurf Solutions Pvt Ltd')
+
+    def test_project_detail_contains_required_sections(self):
+        response = self.client.get(reverse('core:project_detail', kwargs={'slug': 'apple-product-pricing-dashboard'}))
+        self.assertContains(response, 'Architecture')
+        self.assertContains(response, 'Results')
+        self.assertContains(response, 'Future Improvements')
