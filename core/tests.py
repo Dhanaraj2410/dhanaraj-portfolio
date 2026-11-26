@@ -54,3 +54,8 @@ class PortfolioSmokeTests(TestCase):
             if project.is_featured:
                 for field in required:
                     self.assertTrue(getattr(project, field), f'{project.slug} is missing {field}')
+
+    def test_projects_api_returns_five_featured_projects(self):
+        response = self.client.get(reverse('core:api_projects'))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.json()), 5)
