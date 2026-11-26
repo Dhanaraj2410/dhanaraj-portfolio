@@ -74,3 +74,7 @@ class PortfolioSmokeTests(TestCase):
         for project in content.PROJECTS:
             if project.is_featured:
                 self.assertTrue(project.github_url.startswith('https://github.com/'))
+
+    def test_projects_are_sorted_by_order(self):
+        featured = [project for project in content.PROJECTS if project.is_featured]
+        self.assertEqual([project.order for project in featured], sorted(project.order for project in featured))
