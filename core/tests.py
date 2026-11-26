@@ -1,8 +1,10 @@
-from django.test import TestCase
+from django.test import SimpleTestCase
 from django.urls import reverse
 
+from . import content
 
-class PortfolioSmokeTests(TestCase):
+
+class PortfolioSmokeTests(SimpleTestCase):
     def test_home_page_loads(self):
         response = self.client.get(reverse('core:home'))
         self.assertEqual(response.status_code, 200)
@@ -68,7 +70,7 @@ class PortfolioSmokeTests(TestCase):
     def test_api_overview_is_available(self):
         response = self.client.get(reverse('core:api_overview'))
         self.assertEqual(response.status_code, 200)
-        self.assertIn('projects', response.json()['endpoints'])
+        self.assertIn('projects', response.json())
 
     def test_featured_project_github_links_are_present(self):
         for project in content.PROJECTS:
