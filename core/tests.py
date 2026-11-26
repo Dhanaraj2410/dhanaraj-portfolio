@@ -22,3 +22,8 @@ class PortfolioSmokeTests(TestCase):
         programming = [skill.name.lower() for skill in content.SKILLS if skill.category == 'PROGRAMMING']
         self.assertNotIn('java', programming)
         self.assertNotIn('r', programming)
+
+    def test_general_resume_uses_uploaded_pdf(self):
+        response = self.client.get(reverse('core:home'))
+        self.assertContains(response, '/static/media/resumes/roles/Resume.pdf')
+        self.assertTrue(content.PROFILE.resume_pdf.url.endswith('Resume(AI_ML).pdf'))
