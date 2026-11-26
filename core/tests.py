@@ -47,3 +47,10 @@ class PortfolioSmokeTests(TestCase):
     def test_apple_dashboard_project_page_loads(self):
         response = self.client.get(reverse('core:project_detail', kwargs={'slug': 'apple-product-pricing-dashboard'}))
         self.assertEqual(response.status_code, 200)
+
+    def test_featured_projects_have_required_detail_data(self):
+        required = ('description', 'problem_statement', 'solution', 'architecture', 'features_list', 'dataset_info', 'results', 'challenges', 'future_improvements')
+        for project in content.PROJECTS:
+            if project.is_featured:
+                for field in required:
+                    self.assertTrue(getattr(project, field), f'{project.slug} is missing {field}')
