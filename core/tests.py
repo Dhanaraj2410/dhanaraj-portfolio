@@ -64,3 +64,8 @@ class PortfolioSmokeTests(TestCase):
         response = self.client.get(reverse('core:api_github'))
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.json()['success'])
+
+    def test_api_overview_is_available(self):
+        response = self.client.get(reverse('core:api_overview'))
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('projects', response.json()['endpoints'])
