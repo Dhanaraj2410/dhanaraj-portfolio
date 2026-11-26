@@ -27,3 +27,7 @@ class PortfolioSmokeTests(TestCase):
         response = self.client.get(reverse('core:home'))
         self.assertContains(response, '/static/media/resumes/roles/Resume.pdf')
         self.assertTrue(content.PROFILE.resume_pdf.url.endswith('Resume(AI_ML).pdf'))
+
+    def test_document_project_page_loads(self):
+        response = self.client.get(reverse('core:project_detail', kwargs={'slug': 'ai-powered-document-intelligence-rag-assistant'}))
+        self.assertEqual(response.status_code, 200)
