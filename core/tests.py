@@ -78,3 +78,8 @@ class PortfolioSmokeTests(TestCase):
     def test_projects_are_sorted_by_order(self):
         featured = [project for project in content.PROJECTS if project.is_featured]
         self.assertEqual([project.order for project in featured], sorted(project.order for project in featured))
+
+    def test_current_experience_is_marked_current(self):
+        current = [item for item in content.EXPERIENCE if item.is_current]
+        self.assertEqual(len(current), 1)
+        self.assertEqual(current[0].company, 'Plainsurf Solutions Pvt Ltd')
