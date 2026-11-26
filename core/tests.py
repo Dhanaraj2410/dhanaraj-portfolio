@@ -11,3 +11,9 @@ class PortfolioSmokeTests(TestCase):
         response = self.client.get(reverse('core:home'))
         self.assertContains(response, 'Top 5')
         self.assertEqual(len(response.context['featured_projects']), 5)
+
+    def test_target_profile_is_consistent(self):
+        response = self.client.get(reverse('core:home'))
+        target = 'Aspiring AI/ML Engineer | Data Scientist | Generative AI & RAG Developer | Data Analyst | Python Developer'
+        self.assertContains(response, target)
+        self.assertEqual(content.PROFILE.title, target)
