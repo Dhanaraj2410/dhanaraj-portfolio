@@ -39,3 +39,7 @@ class PortfolioSmokeTests(TestCase):
     def test_interview_project_page_loads(self):
         response = self.client.get(reverse('core:project_detail', kwargs={'slug': 'ai-powered-mock-interview-platform'}))
         self.assertEqual(response.status_code, 200)
+
+    def test_insurepredict_project_page_loads(self):
+        response = self.client.get(reverse('core:project_detail', kwargs={'slug': 'insurepredict-insurance-cost-prediction'}))
+        self.assertEqual(response.status_code, 200)
