@@ -2,11 +2,68 @@
 REST API views for the portfolio platform (static, no database).
 Content is served from core/content.py.
 """
+import requests
+
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from . import content
+
+
+@api_view(['GET'])
+def github_api(request):
+    """Return GitHub profile data, with a safe local fallback."""
+    username = 'Dhanaraj2410'
+    headers = {'Accept': 'application/vnd.github+json', 'User-Agent': 'dhanaraj-portfolio'}
+    try:
+        profile_response = requests.get(
+            f'https://api.github.com/users/{username}', headers=headers, timeout=5
+        )
+        repos_response = requests.get(
+            f'https://api.github.com/users/{username}/repos?per_page=100&sort=updated',
+            headers=headers,
+            timeout=5,
+        )
+        profile_response.raise_for_status()
+        repos_response.raise_for_status()
+        profile_data = profile_response.json()
+        repositories = [
+            {
+                'name': repo['name'],
+                'description': repo.get('description') or '',
+                'language': repo.get('language') or '',
+                'stars': repo.get('stargazers_count', 0),
+                'forks': repo.get('forks_count', 0),
+                'updated_at': repo.get('updated_at'),
+                'url': repo.get('html_url'),
+            }
+            for repo in repos_response.json()
+        ]
+        languages = {}
+        for repo in repositories:
+            if repo['language']:
+                languages[repo['language']] = languages.get(repo['language'], 0) + 1
+        return Response({
+            'success': True,
+            'profile': profile_data,
+            'repositories': repositories,
+            'languages': languages,
+            'total_stars': sum(repo['stars'] for repo in repositories),
+        })
+    except (requests.RequestException, ValueError, KeyError):
+        return Response({
+            'success': True,
+            'profile': {
+                'username': username,
+                'name': 'Dhanaraj Lokhande',
+                'bio': 'AI/ML Engineer | Data Scientist',
+                'html_url': f'https://github.com/{username}',
+            },
+            'repositories': [],
+            'languages': {},
+            'total_stars': 0,
+        })
 
 
 @api_view(['GET'])

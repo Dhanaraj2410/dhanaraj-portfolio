@@ -134,16 +134,18 @@ function generateRecruiterAIReply(userMsg) {
       `2. **InsurePredict Web Application** — Django MVC, Scikit-learn, Linear Regression, HTML/CSS/JS\n` +
       `3. **AI Loan Approval Prediction System** — Django Backend, MySQL, ML Pipeline\n` +
       `4. **Developer Portfolio & AI Assistant Platform** — Custom Python/Django backend engine\n\n` +
-      `💼 Dhanaraj also currently works as a **Python Developer Intern at QSpiders Pune**, writing modular OOP code and optimizing MySQL backend queries.`;
+      `💼 Dhanaraj currently works as an **AI Trainee at Plainsurf Solutions Pune**, building AI/ML and Generative AI features with Python, NLP, LLMs, and RAG.`;
   }
 
   // 4. What internships does he have?
   if (msg.includes('internship') || msg.includes('work experience') || msg.includes('experience') || msg.includes('company') || msg.includes('qspiders') || msg.includes('technoworld')) {
-    return `💼 **Practical Industry Internships (Currently Active):**\n\n` +
-      `1. 🟢 **Data Science Intern — Technoworld Softwares, Pune** *(Feb 2026 — Present)*\n` +
-      `   • Building production ML models, performing EDA, feature engineering, and model evaluation using Scikit-learn.\n\n` +
-      `2. 🟢 **Python Developer Intern — QSpiders, Pune** *(Jan 2026 — Present)*\n` +
-      `   • Developing modular OOP Python applications, writing complex SQL queries, and designing RESTful API logic.`;
+    return `💼 **Professional Experience:**\n\n` +
+      `1. 🟢 **AI Trainee — Plainsurf Solutions Pvt Ltd, Pune** *(Oct 2026 — Present)*\n` +
+      `   • Working on AI/ML and Generative AI solutions using Python, NLP, LLMs, and the OpenAI API.\n\n` +
+      `2. **Data Science Intern — Technoworld Softwares, Pune** *(Feb 2026 — Jul 2026)*\n` +
+      `   • Built and evaluated ML models and prepared model-ready data using Python, Pandas, NumPy, and SQL.\n\n` +
+      `3. **Python Intern — QSpiders, Pune** *(Jan 2026 — Sep 2026)*\n` +
+      `   • Developed Django applications and REST APIs using Python, OOP, SQL/MySQL, and CRUD operations.`;
   }
 
   // 5. What certifications does he have?
@@ -184,7 +186,7 @@ function generateRecruiterAIReply(userMsg) {
   if (msg.includes('why') || msg.includes('hire') || msg.includes('reasons') || msg.includes('strengths') || msg.includes('advantage')) {
     return `🌟 **Top 5 Reasons to Hire Dhanaraj Arjun Lokhande:**\n\n` +
       `1. 🎓 **Proven Academic Excellence:** 8.54 CGPA in B.E. Information Technology from SPPU.\n` +
-      `2. 💼 **Dual Active Internships:** Gaining real industry experience in Data Science (Technoworld Softwares) and Python Dev (QSpiders).\n` +
+      `2. 💼 **Practical Industry Experience:** AI Trainee at Plainsurf Solutions, with previous internships at Technoworld Softwares and QSpiders.\n` +
       `3. 📜 **IIT Roorkee Certified:** Verified professional certification in Data Science & Artificial Intelligence.\n` +
       `4. 🚀 **End-to-End Build Capabilities:** Skilled in going from raw data to trained ML models and deployed Django web applications.\n` +
       `5. ⚡ **Fast Learner & Immediate Availability:** Ready to make an immediate impact from Day 1!`;

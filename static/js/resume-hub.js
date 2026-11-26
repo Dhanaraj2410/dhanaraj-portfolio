@@ -13,8 +13,8 @@ const CANDIDATE_PROFILE = {
   location: "Pune, Maharashtra, India",
   email: "lokhandedhanraj2410@gmail.com",
   phone: "+91 7507855698",
-  linkedin: "https://linkedin.com/in/dhanaraj-lokhande-a27536283",
-  github: "https://github.com/DhanarajLokhande",
+  linkedin: "https://www.linkedin.com/in/dhanaraj-lokhande2410",
+  github: "https://github.com/Dhanaraj2410",
   certifications: [
     "IIT Roorkee (iHUB DivyaSampark) — Data Science & AI Professional Certification",
     "Intellipaat — SQL Course Certification",
@@ -23,9 +23,18 @@ const CANDIDATE_PROFILE = {
   ],
   internships: [
     {
+      role: "AI Trainee",
+      company: "Plainsurf Solutions Pvt Ltd, Pune",
+      period: "Oct 2026 — Present",
+      bullets: [
+        "Working on AI/ML and Generative AI solutions using Python, NLP, LLMs, and the OpenAI API.",
+        "Building and testing RAG-based and ML-driven features with embeddings and vector search for semantic retrieval."
+      ]
+    },
+    {
       role: "Data Science Intern",
       company: "Technoworld Softwares, Pune",
-      period: "Feb 2026 — Present",
+      period: "Feb 2026 — Jul 2026",
       bullets: [
         "Building end-to-end ML models and data preprocessing pipelines using Python and Scikit-learn.",
         "Performing exploratory data analysis (EDA), feature selection, and model evaluation on production datasets.",
@@ -33,13 +42,12 @@ const CANDIDATE_PROFILE = {
       ]
     },
     {
-      role: "Python Developer Intern",
+      role: "Python Intern",
       company: "QSpiders, Pune",
-      period: "Jan 2026 — Present",
+      period: "Jan 2026 — Sep 2026",
       bullets: [
-        "Developing modular Python scripts applying Object-Oriented Programming (OOP) principles.",
-        "Writing optimized SQL database queries, performing table joins, and integrating MySQL backend databases.",
-        "Building full-stack web features using Python and RESTful API design."
+        "Developed Django applications and REST APIs using Python, OOP, SQL/MySQL, and CRUD operations.",
+        "Debugged and tested applications to ensure reliable data flow and application stability."
       ]
     }
   ]
@@ -47,12 +55,25 @@ const CANDIDATE_PROFILE = {
 
 // Role-specific resume data tailored for 2026 Fresher applications
 const ROLE_RESUMES = {
+  "general": {
+    id: "general",
+    roleTitle: "General AI/ML Resume",
+    badge: "📄 Complete Professional Profile",
+    summary: "Information Technology graduate with an 8.54 CGPA and hands-on experience in Python, SQL, machine learning, NLP, Generative AI, RAG, Django, dashboards, databases, and backend development.",
+    topSkills: ["Python", "SQL", "Django / DRF", "Machine Learning", "NLP", "Generative AI", "RAG / FAISS", "Power BI", "Docker"],
+    keyProjects: [
+      { title: "AI-Powered Document Intelligence & RAG Assistant", tech: "Python, Django, FAISS, Sentence Transformers, OpenAI API", points: ["Built a document Q&A and semantic search system using retrieval-augmented generation."] },
+      { title: "Intelligent Loan Risk Assessment & Prediction Platform", tech: "Python, Scikit-learn, XGBoost, Django", points: ["Developed an ML risk prediction platform with feature engineering and model evaluation."] }
+    ],
+    adminResumeUrl: null
+  },
+
   "data-analyst": {
     id: "data-analyst",
     roleTitle: "Data Analyst / Business Analyst",
     badge: "📊 Analytics & BI Focus",
-    summary: "Detail-oriented 2026 IT Fresh Graduate (8.54 CGPA) with hands-on expertise in SQL, Power BI, Excel, Pandas, and Business Analytics. Experienced in converting complex raw datasets into interactive visual dashboards, automated metrics reports, and actionable business insights.",
-    topSkills: ["SQL (MySQL)", "Power BI", "Python (Pandas, NumPy)", "Excel (Pivot, VLOOKUP)", "Tableau", "EDA & Data Cleaning", "Business Analytics", "Data Visualization", "ETL Process"],
+    summary: "Data Analyst with hands-on experience in SQL, Python, Power BI, Excel, Tableau, and Business Intelligence. Skilled in data cleaning, EDA, ETL, data modeling, dashboard development, KPI reporting, and data visualization.",
+    topSkills: ["SQL / MySQL / PostgreSQL", "Python / Pandas / NumPy", "Power BI / DAX", "Power Query / ETL", "Excel / Pivot Tables", "Tableau", "EDA & Data Cleaning", "Data Modeling", "KPI Reporting"],
     keyProjects: [
       {
         title: "InsurePredict — Exploratory Data Analysis & Cost Pipeline",
@@ -76,10 +97,10 @@ const ROLE_RESUMES = {
 
   "data-science": {
     id: "data-science",
-    roleTitle: "Data Scientist / Data Science Specialist",
+    roleTitle: "Data Scientist / Data Science",
     badge: "🤖 Predictive Analytics & Modeling",
-    summary: "Analytical 2026 Fresher (IIT Roorkee Certified in Data Science & AI) with strong capabilities in statistical modeling, machine learning, feature engineering, and data pipeline design. Proven track record building end-to-end predictive applications in Python.",
-    topSkills: ["Python", "Scikit-learn", "Pandas & NumPy", "Regression & Classification", "Feature Engineering", "Exploratory Data Analysis", "Matplotlib & Seaborn", "Statistical Testing", "Model Evaluation & Tuning"],
+    summary: "Entry-level AI/ML Engineer and Data Scientist skilled in Python, SQL, machine learning, NLP, and Generative AI. Experienced in data cleaning, EDA, feature engineering, predictive modeling, visualization, RAG, FAISS, Django, and Docker.",
+    topSkills: ["Python / SQL", "Pandas / NumPy", "EDA & Data Cleaning", "Feature Engineering", "Regression / Classification", "XGBoost / Scikit-learn", "TensorFlow / Keras", "NLP / RAG", "Power BI"],
     keyProjects: [
       {
         title: "InsurePredict — Health Insurance Premium Prediction Engine",
@@ -90,7 +111,7 @@ const ROLE_RESUMES = {
         ]
       },
       {
-        title: "AI Loan Approval Classification Engine",
+        title: "Intelligent Loan Risk Assessment & Prediction Platform",
         tech: "Python, Scikit-learn, Random Forest/Logistic Regression, MySQL",
         points: [
           "Achieved 86% accuracy in predicting applicant loan eligibility based on financial attributes.",
@@ -105,8 +126,8 @@ const ROLE_RESUMES = {
     id: "machine-learning",
     roleTitle: "Machine Learning / AI Engineer",
     badge: "🧠 AI / ML & GenAI Systems",
-    summary: "Innovative 2026 AI/ML Engineer with hands-on experience building, evaluating, and deploying intelligent machine learning and NLP systems. Proficient in Scikit-learn, TensorFlow basics, OpenAI API integration, and Django-backed AI applications.",
-    topSkills: ["Python", "Machine Learning", "NLP (Natural Language Processing)", "OpenAI API / GenAI", "Scikit-learn", "TensorFlow & Keras", "Model Deployment (Django)", "REST API Integration", "Hyperparameter Tuning"],
+    summary: "Entry-level AI/ML Engineer with hands-on experience building machine learning, deep learning, NLP, and Generative AI applications in Python. Built RAG pipelines and deployed ML/DL models as Django REST APIs.",
+    topSkills: ["Regression / Classification", "Random Forest / XGBoost", "Scikit-learn", "TensorFlow / Keras", "NLP / LLMs", "Generative AI / RAG", "FAISS / Embeddings", "Django / DRF", "Model Evaluation"],
     keyProjects: [
       {
         title: "AI-Powered Mock Interview & Scoring Platform",
@@ -132,8 +153,8 @@ const ROLE_RESUMES = {
     id: "python-developer",
     roleTitle: "Python Developer / Backend Engineer",
     badge: "🐍 Core Python & Web Development",
-    summary: "Solid Core Python 2026 Fresh Graduate (Python Developer Intern at QSpiders) with expertise in Object-Oriented Programming (OOP), Django web framework, MySQL integration, REST API architecture, and clean reusable code design.",
-    topSkills: ["Python 3", "Object-Oriented Programming (OOP)", "Django Framework", "RESTful APIs", "MySQL / SQL", "Data Structures & Algorithms", "Git & GitHub", "HTML5 / CSS3 / JavaScript", "Modular Architecture"],
+    summary: "Entry-level Python Developer with hands-on experience in Python, Django, Django REST Framework, REST APIs, SQL, MySQL, PostgreSQL, OOP, AI/ML integration, debugging, and SDLC practices.",
+    topSkills: ["Core Python / OOP", "Django / DRF", "REST APIs", "SQL / MySQL / PostgreSQL", "JavaScript / HTML5 / CSS3", "Pandas / NumPy", "Git / GitHub", "Docker", "DSA / Debugging"],
     keyProjects: [
       {
         title: "AI Mock Interview Web Platform (Django & REST)",
@@ -159,8 +180,8 @@ const ROLE_RESUMES = {
     id: "sql-developer",
     roleTitle: "SQL Developer / Database Analyst",
     badge: "🗃️ Database Engineering & Queries",
-    summary: "Certified SQL Developer (Intellipaat Certified) and 2026 IT Fresher with strong hands-on skills in relational database management, complex JOINs, subqueries, database schema design, indexing, and MySQL data integration.",
-    topSkills: ["SQL (MySQL)", "Complex JOINs & Subqueries", "Database Schema Design", "Index Optimization", "Data Modeling & Normalization", "MySQL Workbench", "Python SQL Connectors", "Stored Procedures & Views", "Data Extraction & Cleaning"],
+    summary: "Entry-level SQL Developer and Data Analyst with hands-on experience in SQL, MySQL, PostgreSQL, joins, CTEs, subqueries, window functions, ETL, KPI reporting, Power BI, Excel, and data validation.",
+    topSkills: ["Advanced SQL", "MySQL / PostgreSQL", "Joins / CTEs / Subqueries", "Window Functions", "Data Cleaning & Validation", "ETL / Data Modeling", "Power BI / DAX", "Excel / KPI Reporting", "Python / Pandas"],
     keyProjects: [
       {
         title: "Relational Database Engine for Financial Loan Systems",
@@ -198,6 +219,8 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------- Role Tab Selection & Content Display ---------- */
   const roleButtons = document.querySelectorAll('.resume-role-tab');
   const roleDisplayContainer = document.getElementById('role-resume-display');
+  const dataScienceTab = document.querySelector('.resume-role-tab[data-role="data-science"]');
+  if (dataScienceTab) dataScienceTab.innerHTML = '<span>🤖</span> Data Scientist / Data Science';
 
   function renderRoleCard(roleKey) {
     const roleData = ROLE_RESUMES[roleKey];
@@ -267,7 +290,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="fresher-verification-banner">
             <div class="fresher-banner__icon">🎓</div>
             <div>
-              <strong>2026 Fresher Advantage:</strong> B.E. IT Graduate (SPPU - 8.54 CGPA) | IIT Roorkee Certified | Internships at Technoworld Softwares & QSpiders | Immediate Availability.
+              <strong>Current Working Profile:</strong> AI Trainee at Plainsurf Solutions | B.E. IT Graduate (SPPU - 8.54 CGPA) | IIT Roorkee Certified.
             </div>
           </div>
         </div>
@@ -285,7 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   if (roleButtons.length > 0) {
-    renderRoleCard('data-analyst');
+    renderRoleCard('general');
   }
 
 
@@ -298,7 +321,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const roleData = ROLE_RESUMES[roleKey] || ROLE_RESUMES['data-analyst'];
     if (!modal || !modalBody) return;
 
-    modalBody.innerHTML = generatePrintableResumeHTML(roleData);
+    // Use the uploaded PDF for official resumes so the preview matches the
+    // original black-and-white document exactly. Generated HTML remains the
+    // fallback for roles without an uploaded PDF.
+    if (roleData.adminResumeUrl) {
+      const pdfUrl = `${roleData.adminResumeUrl}#toolbar=1&navpanes=0&scrollbar=1&view=FitH`;
+      modalBody.innerHTML = `
+        <div class="resume-pdf-viewer">
+          <iframe class="resume-pdf-frame" src="${pdfUrl}" title="${roleData.roleTitle} resume preview"></iframe>
+        </div>
+      `;
+    } else {
+      modalBody.innerHTML = generatePrintableResumeHTML(roleData);
+    }
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
   };
@@ -363,22 +398,22 @@ function generatePrintableResumeHTML(roleData, isStandalone = false) {
 
   const styleTag = `
     <style>
-      body { font-family: 'Segoe UI', Arial, sans-serif; color: #1e293b; line-height: 1.5; margin: 0; padding: ${isStandalone ? '2rem' : '0'}; background: #fff; }
-      .res-container { max-width: 800px; margin: 0 auto; padding: 2rem; border: 1px solid #e2e8f0; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+      ${isStandalone ? "body { font-family: 'Segoe UI', Arial, sans-serif; color: #1e293b; line-height: 1.5; margin: 0; padding: 2rem; background: #fff; }" : ''}
+      .res-container { max-width: 800px; margin: 0 auto; padding: 2rem; color: var(--text-primary, #1e293b); background: var(--bg-secondary, #fff); border: 1px solid var(--border-subtle, #e2e8f0); border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
       .res-header { text-align: center; border-bottom: 2px solid #6366f1; padding-bottom: 1rem; margin-bottom: 1.5rem; }
-      .res-name { font-size: 2rem; font-weight: 800; color: #0f172a; margin: 0; letter-spacing: -0.5px; }
-      .res-target { font-size: 1.1rem; font-weight: 700; color: #6366f1; margin-top: 0.25rem; text-transform: uppercase; letter-spacing: 0.5px; }
-      .res-contact { font-size: 0.9rem; color: #64748b; margin-top: 0.5rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+      .res-name { font-size: 2rem; font-weight: 800; color: var(--text-primary, #0f172a); margin: 0; letter-spacing: -0.5px; }
+      .res-target { font-size: 1.1rem; font-weight: 700; color: var(--text-accent, #6366f1); margin-top: 0.25rem; text-transform: uppercase; letter-spacing: 0.5px; }
+      .res-contact { font-size: 0.9rem; color: var(--text-secondary, #64748b); margin-top: 0.5rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
       .res-contact a { color: #4338ca; text-decoration: none; }
       .res-section { margin-bottom: 1.5rem; }
-      .res-sec-title { font-size: 1.1rem; font-weight: 700; color: #0f172a; border-bottom: 1.5px solid #cbd5e1; padding-bottom: 0.25rem; margin-bottom: 0.75rem; text-transform: uppercase; }
-      .res-summary { font-size: 0.95rem; color: #334155; line-height: 1.6; }
+      .res-sec-title { font-size: 1.1rem; font-weight: 700; color: var(--text-primary, #0f172a); border-bottom: 1.5px solid var(--border-color, #cbd5e1); padding-bottom: 0.25rem; margin-bottom: 0.75rem; text-transform: uppercase; }
+      .res-summary { font-size: 0.95rem; color: var(--text-secondary, #334155); line-height: 1.6; }
       .res-skills-list { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }
-      .res-skill-pill { background: #f1f5f9; color: #1e293b; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.85rem; font-weight: 600; border: 1px solid #e2e8f0; }
+      .res-skill-pill { background: var(--bg-input, #f1f5f9); color: var(--text-primary, #1e293b); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.85rem; font-weight: 600; border: 1px solid var(--border-subtle, #e2e8f0); }
       .res-item { margin-bottom: 1rem; }
-      .res-item-header { display: flex; justify-content: space-between; align-items: baseline; font-weight: 700; font-size: 0.95rem; color: #0f172a; }
-      .res-item-sub { font-size: 0.85rem; color: #6366f1; font-weight: 600; margin-bottom: 0.3rem; }
-      .res-bullets { margin: 0.3rem 0 0 1.2rem; padding: 0; font-size: 0.9rem; color: #334155; }
+      .res-item-header { display: flex; justify-content: space-between; align-items: baseline; font-weight: 700; font-size: 0.95rem; color: var(--text-primary, #0f172a); }
+      .res-item-sub { font-size: 0.85rem; color: var(--text-accent, #6366f1); font-weight: 600; margin-bottom: 0.3rem; }
+      .res-bullets { margin: 0.3rem 0 0 1.2rem; padding: 0; font-size: 0.9rem; color: var(--text-secondary, #334155); }
       .res-bullets li { margin-bottom: 0.25rem; }
       .res-badge-2026 { background: #e0e7ff; color: #3730a3; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 700; font-size: 0.8rem; display: inline-block; margin-bottom: 0.5rem; }
       @media print {
@@ -417,7 +452,7 @@ function generatePrintableResumeHTML(roleData, isStandalone = false) {
       </div>
 
       <div class="res-section">
-        <div class="res-sec-title">Work Experience & Internships</div>
+        <div class="res-sec-title">Professional Experience</div>
         ${p.internships.map(intern => `
           <div class="res-item">
             <div class="res-item-header">

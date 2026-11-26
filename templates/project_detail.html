@@ -63,6 +63,13 @@
       </div>
       {% endif %}
 
+      {% if project.architecture %}
+      <div class="card fade-up">
+        <h3 style="font-weight: 700; margin-bottom: var(--space-md);">Architecture</h3>
+        <p style="color: var(--text-secondary); line-height: 1.8;">{{ project.architecture }}</p>
+      </div>
+      {% endif %}
+
       <!-- Features -->
       {% if project.features_list %}
       <div class="card fade-up">
@@ -82,6 +89,13 @@
       <div class="card fade-up">
         <h3 style="font-weight: 700; margin-bottom: var(--space-md);">📊 Dataset</h3>
         <p style="color: var(--text-secondary); line-height: 1.8;">{{ project.dataset_info }}</p>
+      </div>
+      {% endif %}
+
+      {% if project.results %}
+      <div class="card fade-up">
+        <h3 style="font-weight: 700; margin-bottom: var(--space-md);">Results</h3>
+        <p style="color: var(--text-secondary); line-height: 1.8;">{{ project.results }}</p>
       </div>
       {% endif %}
 

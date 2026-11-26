@@ -18,7 +18,8 @@ function initThemeToggle() {
   const toggle = document.getElementById('theme-toggle');
   if (!toggle) return;
 
-  const savedTheme = localStorage.getItem('portfolio-theme') || 'dark';
+  const storedTheme = localStorage.getItem('portfolio-theme');
+  const savedTheme = storedTheme === 'light' || storedTheme === 'dark' ? storedTheme : 'dark';
   document.documentElement.setAttribute('data-theme', savedTheme);
   updateThemeIcon(toggle, savedTheme);
 
@@ -27,6 +28,14 @@ function initThemeToggle() {
     const next = current === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', next);
     localStorage.setItem('portfolio-theme', next);
+    updateThemeIcon(toggle, next);
+  });
+
+  // Keep other open portfolio tabs synchronized without changing the current tab's state.
+  window.addEventListener('storage', (event) => {
+    if (event.key !== 'portfolio-theme') return;
+    const next = event.newValue === 'light' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
     updateThemeIcon(toggle, next);
   });
 }

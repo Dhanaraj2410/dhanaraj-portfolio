@@ -44,8 +44,20 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+  <!-- Apply the saved theme before the stylesheet renders to prevent a flash or reset. -->
+  <script>
+    (() => {
+      try {
+        const savedTheme = localStorage.getItem('portfolio-theme');
+        if (savedTheme === 'dark' || savedTheme === 'light') {
+          document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+      } catch (_) {}
+    })();
+  </script>
+
   <!-- Styles -->
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}?v=20261126-six-resumes">
   {% block extra_css %}{% endblock %}
 </head>
 <body>
@@ -107,8 +119,8 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="{% static 'js/main.js' %}"></script>
-  <script src="{% static 'js/resume-hub.js' %}"></script>
+  <script src="{% static 'js/main.js' %}?v=20261126-top5-projects"></script>
+  <script src="{% static 'js/resume-hub.js' %}?v=20261126-profile-text"></script>
   <script src="{% static 'js/workflow.js' %}"></script>
   {% block extra_js %}{% endblock %}
 </body>

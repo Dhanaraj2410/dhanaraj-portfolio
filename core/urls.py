@@ -26,5 +26,6 @@ urlpatterns = [
     path('api/achievements/', api_views.achievements_api, name='api_achievements'),
     path('api/social-links/', api_views.social_links_api, name='api_social_links'),
     path('api/job-roles/', api_views.job_roles_api, name='api_job_roles'),
+    path('api/github/', api_views.github_api, name='api_github'),
     path('api/contact/', api_views.contact_api, name='api_contact'),
 ]
