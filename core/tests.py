@@ -69,3 +69,8 @@ class PortfolioSmokeTests(TestCase):
         response = self.client.get(reverse('core:api_overview'))
         self.assertEqual(response.status_code, 200)
         self.assertIn('projects', response.json()['endpoints'])
+
+    def test_featured_project_github_links_are_present(self):
+        for project in content.PROJECTS:
+            if project.is_featured:
+                self.assertTrue(project.github_url.startswith('https://github.com/'))
