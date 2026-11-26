@@ -17,3 +17,8 @@ class PortfolioSmokeTests(TestCase):
         target = 'Aspiring AI/ML Engineer | Data Scientist | Generative AI & RAG Developer | Data Analyst | Python Developer'
         self.assertContains(response, target)
         self.assertEqual(content.PROFILE.title, target)
+
+    def test_programming_skills_exclude_removed_languages(self):
+        programming = [skill.name.lower() for skill in content.SKILLS if skill.category == 'PROGRAMMING']
+        self.assertNotIn('java', programming)
+        self.assertNotIn('r', programming)
