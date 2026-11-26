@@ -59,3 +59,8 @@ class PortfolioSmokeTests(TestCase):
         response = self.client.get(reverse('core:api_projects'))
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.json()), 5)
+
+    def test_github_api_returns_success_payload(self):
+        response = self.client.get(reverse('core:api_github'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.json()['success'])
